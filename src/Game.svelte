@@ -49,21 +49,30 @@
  
 </script>
 
-<main>
+<style global lang="postcss">
+    @tailwind base;
+      @tailwind components;
+        @tailwind utilities;
+</style>
+
+
+
+<main class="w-full h-full">
   {#if stepIndex < 5}
-  <div transition:fade>
+  <div transition:fade class="absolute top-0 w-full h-full">
     <Circles {highlight} {data} {selected} {step} />
   </div>
   {:else if stepIndex === 5}
-    <div transition:fade>
+    <div transition:fade class="absolute top-0 w-full h-full">
       <Question on:answer={handleAnswer} data={selected} {question}/>
     </div>
   {:else}
-    <Answers {data} {answer} {question}/>
+    <div transition:fade class="absolute top-0 w-full h-full">
+      <Answers {data} {answer} {question}/>
+    </div>
   {/if}
+  <div class="absolute bottom-0">
   <button on:click={prev} >Prev</button>
   <button on:click={next} >Next</button>
+    </div>
 </main>
-
-<style>
-</style>

@@ -8,7 +8,7 @@ let temps = Array.from({ length: 34 - 15 + 1  }, (_, i) => i+15)
 
 let types = [{name: "highest", method: Math.max}]
 let columns = [{name: "temperature", column: "temp"}]
-for(let i=0;i<4000;i++) {
+for(let i=0;i<6000;i++) {
   let randomIndexIsland = Math.random()*islands.length | 0;
   let randomIndexTemps = Math.random()*temps.length | 0;
   let monthIndex = Math.random()*monthNames.length | 0;

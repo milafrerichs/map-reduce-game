@@ -23,8 +23,8 @@
     let selectedRows;
 
 
-  $: cols = step === "oneCol" || step === "table" ? 1 : width / (size+padding);
-  $: rows = step === "oneCol" || step === "table" ? selectedRows : dataRows;
+  $: cols = step === "oneCol" || step === "table" ? 1 : Math.ceil(width / (size+padding));
+  $: rows = step === "oneCol" || step === "table" ? selectedRows : (step === "oneRow" ? 1 : dataRows);
   $: selectedRows = Math.ceil(selected.length / cols);
   $: dataRows = Math.ceil(data.length / cols);
 
@@ -43,19 +43,19 @@
                   }))
               },
             update => update
-            .call(enter => enter.transition(t)
+            .call(update => update.transition(t)
                 .attr('transform', (d,i) => {
                     return `translate(${colScale(col(i))},${rowScale(row(i))})`
                   })),
             exit => exit
-            .call(enter => enter.transition(t).delay((d) => 7)
+            .call(exit => exit.transition(t)
                 .attr('transform', (d) => "translate(0,0)")
                 .remove())
           )
   }
 
   $: if(step === "table") {
-    const t = d3select(dots).transition().duration(300);
+    const t = d3select(dots).transition().duration(400);
     d3select(dots).selectAll('.dot')
         .data(selected, (d) => {
             return d && d.id;
@@ -119,15 +119,15 @@
 
 </script>
 
-<main>
+<main bind:offsetWidth={width} bind:offsetHeight={height}>
   <svg width={width} height={height} bind:this={svg}>
     <g bind:this={dots}>
     {#each data as d,i}
       <g class="dot" transform="translate({colScale(col(i))},{rowScale(row(i))})">
       {#if selected.some(e => e.id === d.id) }
-          <circle  transition:fade="{{duration: 200}}" r="5" fill="red"/>
+          <circle transition:fade="{{duration: 400, delay: selected.indexOf(d)*100 }}" r="5" fill="red"/>
         {:else}
-          <circle  transition:fade r="5" fill="gray"/>
+          <circle transition:fade r="5" fill="gray"/>
         {/if}
       </g>
     {/each}

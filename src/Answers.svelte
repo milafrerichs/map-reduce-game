@@ -20,7 +20,7 @@
     answers.push(answer)
   }
 </script>
-<div class="">
-  <h2>Here are all the answers from the other mappers</h2>
+<div class="m-auto max-w-7xl h-full">
+    <h2 class="text-4xl mb-8 text-center">Here are all the answers from the other mappers</h2>
   <Table data={answers} {columns} />
 </div>

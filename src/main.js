@@ -23,8 +23,21 @@ let question = {
   typeFunction: types[0].method,
   text: `Which Island has the ${types[0].name} ${columns[0].name} in ${randomMonth}`
 }
+
+function gameEvent(direction, slideIndex) {
+  window.dispatchEvent(new CustomEvent(`mrGame:${direction}`, { bubbles: true, detail: {slideIndex}}))
+}
+
+document.getElementById("next").addEventListener("click", () => {
+  gameEvent("next", 1)
+})
+
+document.getElementById("prev").addEventListener("click", () => {
+  gameEvent("prev", 1)
+})
+
 const app = new Game({
-	target: document.body,
+	target: document.getElementById("app"),
 	props: {
 		name: 'world',
     data,

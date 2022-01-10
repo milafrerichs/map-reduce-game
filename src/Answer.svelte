@@ -14,12 +14,10 @@
   let answers = [];
 
   $: if(data) {
-    let chunkData = chunkArray(data, 100)
-    answers = chunkData.map((d) => getResults(d, question)[0])
-    answers.filter((d) => !d)
-    answers.push(answer)
+    answers = getResults(data, question)
   }
 </script>
 <div class="m-auto max-w-7xl h-full">
+    <h3 class="text-2xl mb-4">{question.text}</h3>
   <Table data={answers} {columns} />
 </div>

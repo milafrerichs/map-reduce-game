@@ -3,6 +3,8 @@
   import Circles from './Circles.svelte';
   import Question from './Question.svelte';
   import Answers from './Answers.svelte';
+  import Answer from './Answer.svelte';
+  import Step from './Step.svelte';
   import { fade } from 'svelte/transition';
   import { randomFromData, chunkArray } from './utils'
   export let data = [];
@@ -54,19 +56,30 @@
   })
 </script>
 
-<main>
+<style global lang="postcss">
+    @tailwind base;
+      @tailwind components;
+        @tailwind utilities;
+</style>
+
+
+
+<main class="w-full h-full">
   {#if stepIndex < 5}
-  <div transition:fade>
-    <Circles {highlight} {data} {selected} {step} />
-  </div>
+    <Step>
+      <Circles {highlight} {data} {selected} {step} />
+    </Step>
   {:else if stepIndex === 5}
-    <div transition:fade>
+    <Step>
       <Question on:answer={handleAnswer} data={selected} {question}/>
-    </div>
-  {:else}
-    <Answers {data} {answer} {question}/>
+    </Step>
+  {:else if stepIndex === 6}
+    <Step>
+      <Answers {data} {answer} {question}/>
+    </Step>
+  {:else if stepIndex === 7}
+    <Step>
+      <Answer {data} {answer} {question}/>
+    </Step>
   {/if}
 </main>
-
-<style>
-</style>

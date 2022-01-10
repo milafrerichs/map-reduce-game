@@ -22,11 +22,13 @@
   }
 
 </script>
-<div class="">
-  <h2>{text}</h2>
-  <Table {data} {columns} />
+<div class="m-auto max-w-7xl h-full">
+  <div class="flex flex-col h-full justify-center items-center">
+    <h2 class="text-4xl mb-8 text-center">{text}</h2>
+    <Table {data} {columns} />
 
-  <input type="text" bind:value={answer}>
-  <button on:click={checkAnswer}>Check Answer</button>
+    <input type="text" bind:value={answer}>
+    <button on:click={checkAnswer}>Check Answer</button>
 
+  </div>
 </div>

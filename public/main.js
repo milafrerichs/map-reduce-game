@@ -1,4 +1,4 @@
-import Game from './Game.svelte';
+import Game from '../src/Game.svelte';
 
 let data = [];
 let islands = [ "Crete", "Evia", "Lesbos", "Rhodes", "Chíos", "Cephalonia", "Corfu", "Lemnos", "Samos", "Naxos", "Zakynthos", "Thassos", "Andros", "Lefkada", "Karpathos", "Kos", "Kythira", "Icaria", "Skyros", "Paros", "Tinos", "Samothrace", "Milos", "Kea", "Amorgos", "Kalymnos", "Ios", "Kythnos", "Astypalaia", "Ithaca", "Salamis"];
@@ -8,7 +8,7 @@ let temps = Array.from({ length: 34 - 15 + 1  }, (_, i) => i+15)
 
 let types = [{name: "highest", method: Math.max}]
 let columns = [{name: "temperature", column: "temp"}]
-for(let i=0;i<4000;i++) {
+for(let i=0;i<6000;i++) {
   let randomIndexIsland = Math.random()*islands.length | 0;
   let randomIndexTemps = Math.random()*temps.length | 0;
   let monthIndex = Math.random()*monthNames.length | 0;

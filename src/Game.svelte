@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import Circles from './Circles.svelte';
   import Question from './Question.svelte';
   import Answers from './Answers.svelte';
@@ -18,7 +19,8 @@
   let table = false;
   let answer;
 
-    $: step = steps[stepIndex];
+
+  $: step = steps[stepIndex];
   function animateSelected() {
     highlight = true;
   }
@@ -48,7 +50,10 @@
     answer = event.detail.answer;
     next()
   }
- 
+  onMount(() => {
+    window.addEventListener('mrGame:next', e => next());
+    window.addEventListener('mrGame:prev', e => prev());
+  })
 </script>
 
 <style global lang="postcss">
@@ -77,8 +82,4 @@
       <Answer {data} {answer} {question}/>
     </Step>
   {/if}
-  <div class="absolute bottom-0">
-  <button on:click={prev} >Prev</button>
-  <button on:click={next} >Next</button>
-    </div>
 </main>

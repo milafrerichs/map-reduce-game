@@ -37,7 +37,7 @@ const name = pkg.name
 
 
 export default {
-	input: 'src/main.js',
+	input: 'public/main.js',
   output: {
     sourcemap: true,
     format: 'iife',

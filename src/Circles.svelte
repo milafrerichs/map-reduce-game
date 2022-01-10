@@ -19,70 +19,17 @@
   let width = 1200;
   let height = 800;
   let dataCols = Math.ceil(Math.sqrt(data.length));
-    let selectedCols;
-    let selectedRows;
+  let selectedCols;
+  let selectedRows;
+  let displayedData = data;
 
 
   $: cols = step === "oneCol" || step === "table" ? 1 : Math.ceil(width / (size+padding));
-  $: rows = step === "oneCol" || step === "table" ? selectedRows : (step === "oneRow" ? 1 : dataRows);
-  $: selectedRows = Math.ceil(selected.length / cols);
   $: dataRows = Math.ceil(data.length / cols);
+  $: selectedRows = Math.ceil(selected.length / cols);
+  $: rows = step === "oneCol" || step === "table" ? selectedRows : (step === "oneRow" ? 1 : dataRows);
+  $: displayedData = (step === "all" || step === "selected") ? data : selected;
 
-  $: if(step === "oneRow" || step === "oneCol") {
-    const t = d3select(dots).transition().duration(300);
-    d3select(dots).selectAll('.dot')
-        .data(selected, (d) => {
-            return d && d.id;
-          })
-        .join(
-            enter => {
-            enter.append('circle')
-            .call(enter => enter.transition().delay((d) => 7)
-                .attr('transform', (d,i) => {
-                    return `translate(${colScale(col(i))},${rowScale(row(i))})`
-                  }))
-              },
-            update => update
-            .call(update => update.transition(t)
-                .attr('transform', (d,i) => {
-                    return `translate(${colScale(col(i))},${rowScale(row(i))})`
-                  })),
-            exit => exit
-            .call(exit => exit.transition(t)
-                .attr('transform', (d) => "translate(0,0)")
-                .remove())
-          )
-  }
-
-  $: if(step === "table") {
-    const t = d3select(dots).transition().duration(400);
-    d3select(dots).selectAll('.dot')
-        .data(selected, (d) => {
-            return d && d.id;
-          })
-        .join(
-            enter => {
-            enter.append('circle')
-            .call(enter => enter.transition().delay((d) => 7)
-                .attr('cx', (d) => +colSelectedScale(d.id))
-                .attr('cy', (d) => +rowSelectedScale(d.id)))
-              },
-            update => update
-            .call(enter => {
-                enter.transition(t)
-                .attr('transform', (d,i) => {
-                  return `translate(${colScale(col(i))},${rowScale(row(i))})`
-                })
-                enter.selectAll('circle').remove()
-                enter.append('text').text((d) => `${d.island}, ${d.temp}°C`)
-
-              }),
-            exit => exit
-            .call(enter => enter.transition(t).delay((d) => 7)
-                .attr('transform', (d) => "translate(0,0)")
-                .remove())
-          )
-  }
 
   $: colScale = scalePoint()
         .domain(range(cols))
@@ -95,7 +42,7 @@
         .padding(1);
 
   $: if(data) {
-    d3select(dots).selectAll('.dot').data(data) //, (d) => d.id)
+    d3select(dots).selectAll('.dot').data(data)
   }
 
   function row(i) {
@@ -106,28 +53,27 @@
     return i % cols;
   }
 
-  function animateSelected() {
-    selectAll('g circle').data(data).attr('fill', (d,i) => { 
-      return 
-    })
-  }
-
   onMount(() => {
-    d3select(dots).selectAll('.dot').data(data) //, (d) => d.id)
+    d3select(dots).selectAll('.dot').data(data)
   })
-
 
 </script>
 
 <main bind:offsetWidth={width} bind:offsetHeight={height}>
   <svg width={width} height={height} bind:this={svg}>
     <g bind:this={dots}>
-    {#each data as d,i}
+    {#each displayedData as d,i}
       <g class="dot" transform="translate({colScale(col(i))},{rowScale(row(i))})">
-      {#if selected.some(e => e.id === d.id) }
-          <circle transition:fade="{{duration: 400, delay: selected.indexOf(d)*100 }}" r="5" fill="red"/>
+        {#if step === "table"}
+          <text>{d.island}, {d.temp}°C</text>
         {:else}
-          <circle transition:fade r="5" fill="gray"/>
+          {#if selected.some(e => e.id === d.id) }
+            <circle r="5" fill="red"/>
+          {:else}
+            {#if step === "all" || step === "selected"}
+              <circle r="5" fill="gray"/>
+            {/if}
+          {/if}
         {/if}
       </g>
     {/each}

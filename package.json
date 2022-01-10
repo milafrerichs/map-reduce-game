@@ -28,14 +28,16 @@
     "svelte": "^3.0.0",
     "svelte-jester": "^2.1.5",
     "svelte-preprocess": "^4.10.1",
-    "tailwindcss": "^3.0.12"
-  },
-  "dependencies": {
-    "d3-scale": "^4.0.2",
-    "d3-selection": "^3.0.0",
-    "d3-transition": "^3.0.1",
+    "tailwindcss": "^3.0.12",
     "sirv-cli": "^1.0.0"
   },
+  "dependencies": {
+  },
+	"peerDependencies": {
+    "d3-scale": "^4.0.2",
+    "d3-selection": "^3.0.0",
+    "d3-transition": "^3.0.1"
+	},
   "jest": {
     "transform": {
       "^.+\\.svelte$": "svelte-jester",

@@ -2,6 +2,8 @@
   import Circles from './Circles.svelte';
   import Question from './Question.svelte';
   import Answers from './Answers.svelte';
+  import Answer from './Answer.svelte';
+  import Step from './Step.svelte';
   import { fade } from 'svelte/transition';
   import { randomFromData, chunkArray } from './utils'
   export let data = [];
@@ -59,17 +61,21 @@
 
 <main class="w-full h-full">
   {#if stepIndex < 5}
-  <div transition:fade class="absolute top-0 w-full h-full">
-    <Circles {highlight} {data} {selected} {step} />
-  </div>
+    <Step>
+      <Circles {highlight} {data} {selected} {step} />
+    </Step>
   {:else if stepIndex === 5}
-    <div transition:fade class="absolute top-0 w-full h-full">
+    <Step>
       <Question on:answer={handleAnswer} data={selected} {question}/>
-    </div>
-  {:else}
-    <div transition:fade class="absolute top-0 w-full h-full">
+    </Step>
+  {:else if stepIndex === 6}
+    <Step>
       <Answers {data} {answer} {question}/>
-    </div>
+    </Step>
+  {:else if stepIndex === 7}
+    <Step>
+      <Answer {data} {answer} {question}/>
+    </Step>
   {/if}
   <div class="absolute bottom-0">
   <button on:click={prev} >Prev</button>

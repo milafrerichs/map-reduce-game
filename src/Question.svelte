@@ -23,12 +23,14 @@
 
 </script>
 <div class="m-auto max-w-7xl h-full">
-  <div class="flex flex-col h-full justify-center items-center">
-    <h2 class="text-4xl mb-8 text-center">{text}</h2>
+  <div class="h-full justify-center items-center">
+    <h2 class="text-4xl mt-8 mb-16 text-center">{text}</h2>
     <Table {data} {columns} />
 
-    <input type="text" bind:value={answer}>
-    <button on:click={checkAnswer}>Check Answer</button>
+    <div class="p-4 border flex flex-col mt-8 max-w-xl">
+      <input type="text" bind:value={answer}>
+      <button on:click={checkAnswer} class="mt-4">Check Answer</button>
+    </div>
 
   </div>
 </div>

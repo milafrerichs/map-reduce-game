@@ -18,6 +18,8 @@
   }
 </script>
 <div class="m-auto max-w-7xl h-full">
-    <h3 class="text-2xl mb-4">{question.text}</h3>
-  <Table data={answers} {columns} />
+  <h3 class="text-2xl mb-4">{question.text}</h3>
+  {#if answers.length > 0}
+    <Table data={answers} {columns} />
+  {/if}
 </div>

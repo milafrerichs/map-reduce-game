@@ -21,5 +21,7 @@
   }
 </script>
 <div class="m-auto max-w-7xl h-full">
-  <Table data={answers} {columns} />
+  {#if answers.length > 0}
+    <Table data={answers} {columns} />
+  {/if}
 </div>

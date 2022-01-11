@@ -4,6 +4,7 @@
   import Question from './Question.svelte';
   import Answers from './Answers.svelte';
   import Answer from './Answer.svelte';
+  import Islands from './Islands.svelte';
   import Step from './Step.svelte';
   import { fade } from 'svelte/transition';
   import { randomFromData, chunkArray } from './utils'
@@ -11,7 +12,7 @@
   export let question;
   let n = 400;
   let selected = []
-  let steps = ["all", "selected", "oneRow", "oneCol", "table"]
+  let steps = ["islands", "all", "selected", "oneRow", "oneCol", "table"]
   let stepIndex = 0;
   let highlight = false;
   let onlySelected = false;
@@ -65,7 +66,11 @@
 
 
 <main class="w-full h-full">
-  {#if stepIndex < 5}
+  {#if stepIndex === 0}
+  <Step>
+    <Islands />
+  </Step>
+  {:else if stepIndex > 0 && stepIndex < 5}
     <Step>
       <Circles {highlight} {data} {selected} {step} />
     </Step>

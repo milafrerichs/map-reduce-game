@@ -13,10 +13,6 @@ document.getElementById("prev").addEventListener("click", () => {
   gameEvent("prev", 1)
 })
 
-document.getElementById("restart").addEventListener("click", () => {
-  gameEvent("restart")
-})
-
 const app = new Game({
   target: document.getElementById("app"),
   props: { name: 'world' }

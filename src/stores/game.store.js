@@ -51,7 +51,7 @@ function reinitializeStore(state) {
 
 export const store = writable();
 
-export const initStore = (initialState = {}) => {
+export function initStore(initialState = {}) {
   const { update, set, subscribe } = store
   const { data, question } = generateData();
 

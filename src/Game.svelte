@@ -6,6 +6,7 @@
   import Answer from './Answer.svelte';
   import Step from './Step.svelte';
   import { fade } from 'svelte/transition';
+  import Sun from './Sun.svelte'
   import { randomFromData, chunkArray } from './utils'
   export let data = [];
   export let question;
@@ -65,7 +66,8 @@
 
 
 <main class="w-full h-full">
-  {#if stepIndex < 5}
+  <Sun colors={['#F7CF52', '#F4581B']} arcAngleRad={Math.PI/2}/>
+  <!-- {#if stepIndex < 5}
     <Step>
       <Circles {highlight} {data} {selected} {step} />
     </Step>
@@ -81,5 +83,5 @@
     <Step>
       <Answer {data} {answer} {question}/>
     </Step>
-  {/if}
+  {/if} -->
 </main>

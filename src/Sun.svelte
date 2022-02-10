@@ -1,14 +1,32 @@
 <script>
   import { onMount } from "svelte";
   import { tweened } from "svelte/motion";
-  import { cubicOut } from "svelte/easing";
+  import { circIn } from "svelte/easing";
 
-  const progress = tweened(0, {
-    duration: 8000,
-    easing: cubicOut,
-  });
+  export let month;
   export let colors;
   export let arcAngleRad;
+
+  const MAX_ROTATION_ARC_ANGLE = 90;
+
+  const MONTHS = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
+  const progress = tweened(0, {
+    duration: 1000,
+    easing: circIn,
+  });
 
   let width;
   let height;
@@ -16,9 +34,13 @@
   $: transformOriginX = width / 2;
   $: transformOriginY =
     (Math.cos(arcAngleRad / 2) * transformOriginX) / Math.sin(arcAngleRad / 2);
-  $: console.log({ height, width, transformOriginY });
 
-  onMount(() => progress.set(80));
+  onMount(() => {
+    let monthIndex = 1 + MONTHS.findIndex((m) => m === month)??0;
+    // if (monthIndex === 11) monthIndex = 12;
+    const rotationAngle = monthIndex * (MAX_ROTATION_ARC_ANGLE / (MONTHS.length + 1));
+    progress.set(rotationAngle);
+  });
 </script>
 
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
@@ -26,12 +48,11 @@
 <template>
   <main>
     <svg {width} {height}>
-      <g id="Layer_2" data-name="Layer 2">
+      <g id="Layer_2" data-name="Layer 2" transform="rotate({MAX_ROTATION_ARC_ANGLE / ( MONTHS.length)} {transformOriginX} {transformOriginY})">
         <g
           id="Layer_1-2"
           data-name="Layer 1"
-          transform="translate(0, {height /
-            2}) rotate({$progress} {transformOriginX} {transformOriginY})"
+          transform="translate(0, {height / 2}) rotate({$progress} {transformOriginX} {transformOriginY})"
         >
           <circle style="fill:{colors[0]};" cx="44.92" cy="44.92" r="22.21" />
           <rect

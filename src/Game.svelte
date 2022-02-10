@@ -66,8 +66,7 @@
 
 
 <main class="w-full h-full">
-  <Sun colors={['#F7CF52', '#F4581B']} arcAngleRad={Math.PI/2}/>
-  <!-- {#if stepIndex < 5}
+  {#if stepIndex < 5}
     <Step>
       <Circles {highlight} {data} {selected} {step} />
     </Step>
@@ -83,5 +82,7 @@
     <Step>
       <Answer {data} {answer} {question}/>
     </Step>
-  {/if} -->
+  {:else if stepIndex === 8}
+    <Sun colors={['#F7CF52', '#F4581B']} arcAngleRad={Math.PI/2} month="december"/>
+  {/if}
 </main>

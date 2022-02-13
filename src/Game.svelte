@@ -6,7 +6,6 @@
   import Answer from './Answer.svelte';
   import Step from './Step.svelte';
   import { fade } from 'svelte/transition';
-  import Sun from './Sun.svelte'
   import { randomFromData, chunkArray } from './utils'
   export let data = [];
   export let question;
@@ -81,8 +80,6 @@
   {:else if stepIndex === 7}
     <Step>
       <Answer {data} {answer} {question}/>
-    </Step>
-  {:else if stepIndex === 8}
-    <Sun colors={['#F7CF52', '#F4581B']} arcAngleRad={Math.PI/2} month="december"/>
+    </Step>    
   {/if}
 </main>

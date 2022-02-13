@@ -1,36 +1,59 @@
 <script>
-  import { createEventDispatcher  } from 'svelte';
-  import { checkData, getEntry } from './utils/data.js';
-  import Table from './Table.svelte';
+  import { createEventDispatcher } from "svelte";
+  import { checkData, getEntry } from "./utils/data.js";
+  import Table from "./TableV2.svelte";
+  import SunIcon from "./icons/Sun.icon.svelte";
+  import CloudsAndRainIcon from "./icons/CloudsAndRain.icon.svelte";
+  import ThermometerIcon from "./icons/Thermometer.icon.svelte";
+
   export let data = [];
   export let question;
-    export let columns = [
-        {key: 'island', name: 'Island'},
-        {key: 'month', name: 'Month'},
-        {key: 'temp', name: 'Temperature in °C'},
-      ]
   const dispatch = createEventDispatcher();
   let { text } = question;
 
   let answer;
 
   function checkAnswer(event) {
-      let correct = checkData(data, question, answer)
-      dispatch('answer', {
-        answer: getEntry(data, question)
-      });
+    let correct = checkData(data, question, answer);
+    dispatch("answer", {
+      answer: getEntry(data, question),
+    });
   }
-
 </script>
-<div class="m-auto max-w-7xl h-full">
-  <div class="h-full justify-center items-center">
-    <h2 class="text-4xl mt-8 mb-16 text-center">{text}</h2>
-    <Table {data} {columns} />
 
-    <div class="p-4 border flex flex-col mt-8 max-w-xl">
-      <input type="text" bind:value={answer}>
-      <button on:click={checkAnswer} class="mt-4">Check Answer</button>
-    </div>
+<div class="m-auto h-full bg-[#66A2AD]">
+  <div class="h-full justify-center items-center question-grid min-w-7xl pt-8 mx-auto">
+    <SunIcon colors={["#F7CF52", "#F4581B"]} classes="justify-self-center" />
+    <section class="bg-white flex items-center justify-center px-7 border border-[#624D4D] border-b-0 border-opacity-5">
+      <h2 class="text-xl my-8 text-center">{text}</h2>
+    </section>
 
+    <Table {data} classes="border border-[#624D4D] border-opacity-5">
+      <svelte:fragment slot="headerColumns">
+        <th>Island</th>
+        <th>Month</th>
+        <th><ThermometerIcon classes="h-6" /></th>
+        <th><CloudsAndRainIcon classes="h-6" /></th>
+      </svelte:fragment>
+      <svelte:fragment slot="columns" let:dataAtColumn={row}>
+        <td>{row.island}</td>
+        <td>{row.month}</td>
+        <td>{row.temp}</td>
+        <td>200</td>
+      </svelte:fragment>
+    </Table>
+
+    <button class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-[#C5EAF5] bg-[#C5EAE3] py-1 rounded-none">
+      Provide your answer
+    </button>
   </div>
 </div>
+
+<style>
+  .question-grid {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: min-content min-content max-content min-content;
+    align-content: flex-start;
+  }
+</style>

@@ -1,6 +1,5 @@
 <script>
   import { getResults } from "./utils/data.js";
-  import { onMount } from "svelte";
   import Table from "./Table.svelte";
 
   export let data = [];

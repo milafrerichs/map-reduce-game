@@ -22,3 +22,18 @@ export function getResults(data, question) {
     return d[question.column] === result
   })
 }
+
+export const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];

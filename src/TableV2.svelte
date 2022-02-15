@@ -20,17 +20,17 @@
 <style global>
 
   .header-row:first-child th{
-    padding-top: 24px;
-    padding-bottom: 20px;
+    padding-top: theme('spacing.6');
+    padding-bottom: theme('spacing.5');
 
   }
   tr:not(.header-row) td{
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: theme('spacing.1');
+    padding-bottom: theme('spacing.1');
   }
 
   .table{
-    border-spacing: 15px 24px;
+    border-spacing: theme('spacing.4') theme('spacing.6');
   }
 
   .table tr th {

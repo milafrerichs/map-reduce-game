@@ -21,14 +21,14 @@
   }
 </script>
 
-<div class="m-auto h-full bg-[#66A2AD]">
+<div class="m-auto h-full bg-app-teal-500">
   <div class="h-full justify-center items-center question-grid min-w-7xl pt-8 mx-auto">
     <SunIcon colors={["#F7CF52", "#F4581B"]} classes="justify-self-center" />
-    <section class="bg-white flex items-center justify-center px-7 border border-[#624D4D] border-b-0 border-opacity-5">
+    <section class="bg-white flex items-center justify-center px-7 border border-question-heading border-b-0 border-opacity-5">
       <h2 class="text-xl my-8 text-center">{text}</h2>
     </section>
 
-    <Table {data} classes="border border-[#624D4D] border-opacity-5">
+    <Table {data} classes="border border-question-heading border-opacity-5">
       <svelte:fragment slot="headerColumns">
         <th>Island</th>
         <th>Month</th>
@@ -43,7 +43,7 @@
       </svelte:fragment>
     </Table>
 
-    <button class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-[#C5EAF5] bg-[#C5EAE3] py-1 rounded-none">
+    <button class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-app-teal-300 bg-app-teal-400 py-1 rounded-none">
       Provide your answer
     </button>
   </div>

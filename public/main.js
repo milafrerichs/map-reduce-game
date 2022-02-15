@@ -21,7 +21,8 @@ let question = {
   column: columns[0].column,
   filter: (d) => { return d.month === randomMonth },
   typeFunction: types[0].method,
-  text: `Which Island has the ${types[0].name} ${columns[0].name} in ${randomMonth}`
+  text: `Which Island has the ${types[0].name} ${columns[0].name} in ${randomMonth}`,
+  month: randomMonth
 }
 
 function gameEvent(direction, slideIndex) {

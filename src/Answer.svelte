@@ -1,5 +1,5 @@
 <script>
-  import { checkData, getResults } from './utils/data.js';
+  import { getResults } from './utils/data.js';
   import Sun from './Sun.svelte'
   import Table from './Table.svelte';
 

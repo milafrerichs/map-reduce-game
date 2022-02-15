@@ -2,8 +2,13 @@
   import { onMount } from "svelte";
   import { tweened } from "svelte/motion";
   import { circIn } from "svelte/easing";
+<<<<<<< HEAD
   import { MONTHS } from "./utils/months";
   
+=======
+  import { monthNames as MONTHS } from "./utils/data";
+
+>>>>>>> 62c41af700d54e403c7d8a843298ba4cbb79ab72
   export let month;
   export let colors;
   export let arcAngleRad;
@@ -24,7 +29,10 @@
 
   onMount(() => {
     let monthIndex = 1 + MONTHS.findIndex((m) => m === month) ?? 0;
+<<<<<<< HEAD
     // if (monthIndex === 11) monthIndex = 12;
+=======
+>>>>>>> 62c41af700d54e403c7d8a843298ba4cbb79ab72
     const rotationAngle =
       monthIndex * (MAX_ROTATION_ARC_ANGLE / (MONTHS.length + 1));
     progress.set(rotationAngle);
@@ -34,7 +42,6 @@
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 
 <template>
-  <main>
     <svg {width} {height}>
       <g
         id="Layer_2"
@@ -174,5 +181,4 @@
         </g>
       </g>
     </svg>
-  </main>
 </template>

@@ -35,7 +35,6 @@
   <div
     class="h-full justify-center items-center question-grid min-w-7xl pt-8 mx-auto bg-app-teal-500"
   >
-    <SunIcon colors={["#F7CF52", "#F4581B"]} classes="justify-self-center" />
     <section
       class="bg-white flex items-center justify-center px-7 border border-question-heading border-b-0 border-opacity-5"
     >
@@ -69,7 +68,7 @@
   .question-grid {
     display: grid;
     grid-auto-flow: row;
-    grid-template-rows: min-content min-content max-content min-content;
+    grid-template-rows: min-content max-content min-content;
     align-content: flex-start;
   }
 </style>

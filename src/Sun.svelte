@@ -33,7 +33,7 @@
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 
 <template>
-    <svg {width} {height}>
+    <svg {width} height={height/2}>
       <g
         id="Layer_2"
         data-name="Layer 2"
@@ -44,7 +44,7 @@
           id="Layer_1-2"
           data-name="Layer 1"
           transform="translate(0, {height /
-            2}) rotate({$progress} {transformOriginX} {transformOriginY})"
+            4}) rotate({$progress} {transformOriginX} {transformOriginY})"
         >
           <circle style="fill:{colors[0]};" cx="44.92" cy="44.92" r="22.21" />
           <rect

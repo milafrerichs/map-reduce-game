@@ -3,13 +3,18 @@
   import { checkData, getEntry } from "./utils/data.js";
   import Table from "./TableV2.svelte";
   import SunIcon from "./icons/Sun.icon.svelte";
+  import SunComponent from "./Sun.svelte";
   import CloudsAndRainIcon from "./icons/CloudsAndRain.icon.svelte";
   import ThermometerIcon from "./icons/Thermometer.icon.svelte";
 
   export let data = [];
+  import { store } from "./stores/game.store";
+
   export let question;
+
   const dispatch = createEventDispatcher();
   let { text } = question;
+  $: data = $store.selected;
 
   let answer;
 
@@ -22,9 +27,18 @@
 </script>
 
 <div class="m-auto h-full bg-app-teal-500">
-  <div class="h-full justify-center items-center question-grid min-w-7xl pt-8 mx-auto">
+  <SunComponent
+    arcAngleRad={Math.PI / 3}
+    month="May"
+    colors={["#F7CF52", "#F4581B"]}
+  />
+  <div
+    class="h-full justify-center items-center question-grid min-w-7xl pt-8 mx-auto bg-app-teal-500"
+  >
     <SunIcon colors={["#F7CF52", "#F4581B"]} classes="justify-self-center" />
-    <section class="bg-white flex items-center justify-center px-7 border border-question-heading border-b-0 border-opacity-5">
+    <section
+      class="bg-white flex items-center justify-center px-7 border border-question-heading border-b-0 border-opacity-5"
+    >
       <h2 class="text-xl my-8 text-center">{text}</h2>
     </section>
 
@@ -43,7 +57,9 @@
       </svelte:fragment>
     </Table>
 
-    <button class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-app-teal-300 bg-app-teal-400 py-1 rounded-none">
+    <button
+      class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-app-teal-300 bg-app-teal-400 py-1 rounded-none"
+    >
       Provide your answer
     </button>
   </div>

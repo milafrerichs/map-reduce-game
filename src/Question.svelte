@@ -33,7 +33,7 @@
     colors={["#F7CF52", "#F4581B"]}
   />
   <div
-    class="h-full justify-center items-center question-grid min-w-7xl pt-8 mx-auto bg-app-teal-500"
+    class="h-full justify-center items-center question-grid min-w-7xl mx-auto bg-app-teal-500 -mt-56"
   >
     <section
       class="bg-white flex items-center justify-center px-7 border border-question-heading border-b-0 border-opacity-5"

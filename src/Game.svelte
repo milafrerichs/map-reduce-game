@@ -15,6 +15,7 @@
   import Step from './Step.svelte';
   import GeoPath from './GeoPath.svelte';
   import { fade } from 'svelte/transition';
+  import { initStore } from "./stores/game.store";
   import { randomFromData, chunkArray } from './utils'
   export let data = [];
   export let question;
@@ -30,11 +31,18 @@
   let size = 200;
   let padding = 20;
 
-  let showGrid = false;
+  let showgrid = false;
   let activeComponent = Island;
   let activeComponentC = GeoPath;
   let activeData = [];
   let activeProps = { }
+
+  const store = initStore({
+    stepIndex: 0,
+    selected: [],
+    restart: true,
+  });
+  const { previous: prev, next, setAnswer, restart  } = store;
 
   let dataset = { features: [] }
     json(
@@ -58,25 +66,13 @@
           })
         });
 
-  $: step = steps[stepIndex];
-  $: showgrid = stepIndex >= steps.indexOf("islands") && stepIndex < 6;
-  function animateSelected() {
-    highlight = true;
-  }
+  $: showgrid = $store.stepIndex >= steps.indexOf("islands") && $store.stepIndex < 6;
+
   function animateOnlySelected() {
       onlySelected = true;
   }
-  function prev() {
-    stepIndex--;
-    if(stepIndex < 1) {
-      stepIndex = 0;
-      selected = [];
-    }
-  }
-  function next() {
-    stepIndex++;
-    if(stepIndex === 2) {
-      activeData = data;
+  $: if($store.stepIndex === 2) {
+      activeData = $store.data;
       size = 10;
       padding = 10;
       selected = [];
@@ -84,54 +80,56 @@
       activeComponent = Dot;
       activeComponentC = CanvasDot;
     }
-    if(stepIndex === 3) {
-      activeData = selected;
+    else if($store.stepIndex === 3) {
+      activeData = $store.selected;
     }
-    if(stepIndex === 6) {
-    }
+
+  function animateSelected() {
+    highlight = true;
   }
   function animateToTable() {
       table = true;
   }
+
   function handleAnswer(event) {
-    answer = event.detail.answer;
-    next()
+    setAnswer(event.detail.answer);
+    next();
   }
 
   onMount(() => {
     window.addEventListener('mrGame:next', e => next());
     window.addEventListener('mrGame:prev', e => prev());
     selected = randomFromData(data)
+    window.addEventListener("mrGame:restart", (e) => restart());
   })
+
 </script>
 
-<style global lang="postcss">
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-</style>
-
-
-
 <main class="w-full h-full" style="background-color: #66A2AD">
-  {#if stepIndex === 0}
+  {#if $store.stepIndex === 0}
     <Islands data={dataset} width={1600} height={800} />
   {:else if showgrid}
     <Step>
       <Grid component={activeComponent} componentProps={activeProps} data={activeData} {size} {padding} />
     </Step>
     <!-- <Circles {highlight} {data} {selected} {step} />-->
-  {:else if stepIndex === 5}
+  {:else if $store.stepIndex === 5}
     <Step>
-      <Question on:answer={handleAnswer} data={selected} {question}/>
+      <Question on:answer={handleAnswer} question={$store.question} />
     </Step>
-  {:else if stepIndex === 6}
+    {:else if $store.stepIndex === 6}
     <Step>
-      <Answers {data} {answer} {question}/>
+      <Answers data={$store.data} question={$store.question} />
     </Step>
-  {:else if stepIndex === 7}
+    {:else if $store.stepIndex === 7}
     <Step>
-      <Answer {data} {answer} {question}/>
+      <Answer data={$store.data} question={$store.question} />
     </Step>
   {/if}
 </main>
+
+<style global lang="postcss">
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+</style>

@@ -2,6 +2,7 @@
   import { checkData, getResults } from './utils/data.js';
   import { chunkArray } from './utils'
   import Table from './Table.svelte';
+  import { store } from "./stores/game.store";
 
   export let data = []
   export let answer = {};
@@ -13,6 +14,7 @@
       ]
   let answers = [];
 
+  $:answer = $store.answer??{}
   $: if(data) {
     let chunkData = chunkArray(data, 100)
     answers = chunkData.map((d) => getResults(d, question)[0])
@@ -21,5 +23,7 @@
   }
 </script>
 <div class="m-auto max-w-7xl h-full">
-  <Table data={answers} {columns} />
+  {#if answers.length > 0}
+    <Table data={answers} {columns} />
+  {/if}
 </div>

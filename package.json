@@ -7,6 +7,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "HOST=0.0.0.0 rollup -c rollup.dev.config.js -w",
+    "demo": "rollup -c rollup.dev.config.js",
     "start": "sirv public --no-clear",
     "test": "jest",
     "test:watch": "jest --watch"

@@ -26,41 +26,45 @@
   }
 </script>
 
-<div class="m-auto h-full bg-app-teal-500">
-  <SunComponent
-    arcAngleRad={Math.PI / 3}
-    month="May"
-    colors={["#F7CF52", "#F4581B"]}
-  />
-  <div
-    class="h-full justify-center items-center question-grid min-w-7xl mx-auto bg-app-teal-500 -mt-56"
-  >
-    <section
-      class="bg-white flex items-center justify-center px-7 border border-question-heading border-b-0 border-opacity-5"
+<div class="m-auto h-full bg-app-teal-500 overflow-y-auto">
+  <div class="max-w-7xl mx-auto overflow-y-auto">
+    <SunComponent
+      month="April"
+      colors={["#F7CF52", "#F4581B"]}
+    />
+    <div
+      class="h-full w-full items-center question-grid mx-auto bg-app-teal-500"
     >
-      <h2 class="text-xl my-8 text-center">{text}</h2>
-    </section>
+      <section
+        class="bg-white flex items-center justify-center px-7 border border-question-heading border-b-0 border-opacity-5"
+      >
+        <h2 class="text-xl my-8 text-center">{text}</h2>
+      </section>
 
-    <Table {data} classes="border border-question-heading border-opacity-5">
-      <svelte:fragment slot="headerColumns">
-        <th>Island</th>
-        <th>Month</th>
-        <th><ThermometerIcon classes="h-6" /></th>
-        <th><CloudsAndRainIcon classes="h-6" /></th>
-      </svelte:fragment>
-      <svelte:fragment slot="columns" let:dataAtColumn={row}>
-        <td>{row.island}</td>
-        <td>{row.month}</td>
-        <td>{row.temp}</td>
-        <td>200</td>
-      </svelte:fragment>
-    </Table>
+      <Table
+        {data}
+        classes="border w-full border-question-heading border-opacity-5"
+      >
+        <svelte:fragment slot="headerColumns">
+          <th>Island</th>
+          <th>Month</th>
+          <th><ThermometerIcon classes="h-6" /></th>
+          <th><CloudsAndRainIcon classes="h-6" /></th>
+        </svelte:fragment>
+        <svelte:fragment slot="columns" let:dataAtColumn={row}>
+          <td>{row.island}</td>
+          <td>{row.month}</td>
+          <td>{row.temp}</td>
+          <td>200</td>
+        </svelte:fragment>
+      </Table>
 
-    <button
-      class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-app-teal-300 bg-app-teal-400 py-1 rounded-none"
-    >
-      Provide your answer
-    </button>
+      <button
+        class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-app-teal-300 bg-app-teal-400 py-1 rounded-none"
+      >
+        Provide your answer
+      </button>
+    </div>
   </div>
 </div>
 

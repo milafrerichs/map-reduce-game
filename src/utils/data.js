@@ -23,6 +23,10 @@ export function getResults(data, question) {
   })
 }
 
+export function checkAnswer() {
+  
+}
+
 export const monthNames = [
   "January",
   "February",

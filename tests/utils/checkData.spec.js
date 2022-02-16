@@ -1,4 +1,4 @@
-import { checkData, getEntry } from '../../src/utils/data.js';
+import { checkData, getEntry, checkAnswer } from '../../src/utils/data.js';
 
 describe("#checkData" , () => {
   it("checks the question data by answer", () => {
@@ -44,5 +44,31 @@ describe("#getEntry" , () => {
     }
     let result = getEntry(data, question);
     expect(result).toStrictEqual({a: 5, b: "c"});
+  })
+})
+
+describe('#checkAnswer', () => {
+  let data = [
+    {a: 15, island: "Corfu"},
+    {a: 20, island: "Corfu"},
+    {a: 30, island: "Corfu"},
+  ]
+  let question = {
+    column: "a",
+    filter: (d) => { return true },
+    typeFunction: Math.max,
+  }
+  test.each([
+    ['Corfu:30', true],
+    ['Corfu=30', true],
+    ['Corfu;30', true],
+    ['corfu:30', true],
+    ['corfu=30', true],
+    ['corfu;30', true],
+    ['Corfu;24', false],
+    ['Bali;30', false],
+  ])('.checkAnswer(%s)', (answer, expected) => {
+    let result = checkAnswer(answer, data, question);
+    expect(result).toEqual(expected);
   })
 })

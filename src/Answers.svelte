@@ -2,10 +2,9 @@
   import { checkData, getResults } from './utils/data.js';
   import { chunkArray } from './utils'
   import Table from './Table.svelte';
-  import { store } from "./stores/game.store";
+  import { answer } from "./stores/game.store";
 
   export let data = []
-  export let answer = {};
   export let question = {}
     export let columns = [
         {key: 'island', name: 'Island'},
@@ -14,12 +13,11 @@
       ]
   let answers = [];
 
-  $:answer = $store.answer??{}
   $: if(data) {
     let chunkData = chunkArray(data, 100)
     answers = chunkData.map((d) => getResults(d, question)[0])
     answers.filter((d) => !d)
-    answers.push(answer)
+    answers.push($answer)
   }
 </script>
 <div class="m-auto max-w-7xl h-full">

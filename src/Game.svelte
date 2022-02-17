@@ -1,54 +1,44 @@
 <script>
-  import { onMount } from "svelte";
-  import Circles from "./Circles.svelte";
-  import Question from "./Question.svelte";
-  import Answers from "./Answers.svelte";
-  import Answer from "./Answer.svelte";
-  import Step from "./Step.svelte";
-  import { initStore } from "./stores/game.store";
+  import { onMount } from 'svelte';
+  import Data from './Data.svelte';
+  import Question from './Question.svelte';
+  import Answers from './Answers.svelte';
+  import Answer from './Answer.svelte';
+  import Step from './Step.svelte';
+  import { fade } from 'svelte/transition';
+  import { currentStep, greece, islands, question, stepIndex, next, prev, restart } from "./stores/game.store";
+  let width;
+  let height;
 
-  let n = 400;
-  let highlight = false;
-
-  const store = initStore({
-    stepIndex: 0,
-    selected: [],
-    restart: true,
-  });
-  const { previous: prev, next, setAnswer, restart } = store;
-
+  function animateOnlySelected() {
+      onlySelected = true;
+  }
   function animateSelected() {
     highlight = true;
+  }
+  function animateToTable() {
+      table = true;
   }
 
   function handleAnswer(event) {
     setAnswer(event.detail.answer);
     next();
   }
+
   onMount(() => {
-    window.addEventListener("mrGame:next", (e) => next());
-    window.addEventListener("mrGame:prev", (e) => prev());
+    window.addEventListener('mrGame:next', e => next());
+    window.addEventListener('mrGame:prev', e => prev());
+    selected = randomFromData(data)
     window.addEventListener("mrGame:restart", (e) => restart());
-  });
+  })
+
 </script>
 
-<main class="w-full h-full">
-  {#if $store.stepIndex < 5}
-    <Step>
-      <Circles {highlight} data={$store.data} />
-    </Step>
-    {:else if $store.stepIndex === 5}
-    <Step>
-      <Question on:answer={handleAnswer} question={$store.question} />
-    </Step>
-    {:else if $store.stepIndex === 6}
-    <Step>
-      <Answers data={$store.data} question={$store.question} />
-    </Step>
-    {:else if $store.stepIndex === 7}
-    <Step>
-      <Answer data={$store.data} question={$store.question} />
-    </Step>
+<main class="w-full h-screen" bind:clientWidth={width} bind:clientHeight={height} style="background-color: #66A2AD">
+  {#if $stepIndex < 4}
+  <Data {width} {height} />
+  {:else}
+    <Question/>
   {/if}
 </main>
 

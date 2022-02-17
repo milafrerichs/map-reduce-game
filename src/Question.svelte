@@ -7,20 +7,17 @@
   import CloudsAndRainIcon from "./icons/CloudsAndRain.icon.svelte";
   import ThermometerIcon from "./icons/Thermometer.icon.svelte";
 
-  import { selectedData } from "./stores/game.store";
-
-  export let question;
+  import { selectedData, question } from "./stores/game.store";
 
   const dispatch = createEventDispatcher();
-  let { text } = question;
   $: data = $selectedData;
 
   let answer;
 
   function checkAnswer(event) {
-    let correct = checkData(data, question, answer);
+    let correct = checkData(data, $question, answer);
     dispatch("answer", {
-      answer: getEntry(data, question),
+      answer: getEntry(data, $question),
     });
   }
 </script>
@@ -28,7 +25,7 @@
 <div class="m-auto h-full bg-app-teal-500 overflow-y-auto">
   <div class="max-w-7xl mx-auto overflow-y-auto">
     <SunComponent
-      month="April"
+      month={$question.month}
       colors={["#F7CF52", "#F4581B"]}
     />
     <div
@@ -37,7 +34,7 @@
       <section
         class="bg-white flex items-center justify-center px-7 border border-question-heading border-b-0 border-opacity-5"
       >
-        <h2 class="text-xl my-8 text-center">{text}</h2>
+        <h2 class="text-xl my-8 text-center">{$question.text}</h2>
       </section>
 
       <Table

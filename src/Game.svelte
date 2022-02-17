@@ -38,7 +38,7 @@
   {#if $stepIndex < 4}
   <Data {width} {height} />
   {:else}
-    <Question question={$question}/>
+    <Question/>
   {/if}
 </main>
 

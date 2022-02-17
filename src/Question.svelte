@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import { checkData, getEntry } from "./utils/data.js";
   import Table from "./Table.svelte";
-  import { store } from "./stores/game.store";
+  import { selectedData } from "./stores/game.store";
 
   export let question;
   export let columns = [
@@ -12,7 +12,7 @@
   ];
   const dispatch = createEventDispatcher();
   let { text } = question;
-  $: data = $store.selected;
+  $: data = $selectedData;
 
   let answer;
 

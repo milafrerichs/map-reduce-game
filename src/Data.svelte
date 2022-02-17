@@ -1,7 +1,6 @@
 <script>
   import { scaleLinear, scaleBand, scalePoint, scaleOrdinal } from 'd3-scale';
   import { range } from 'd3-array';
-  import Islands from './Islands.svelte';
   import Island from './Island.svelte';
   import Greece from './Greece.svelte';
   import Dot from './Dot.svelte';

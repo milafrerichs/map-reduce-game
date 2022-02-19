@@ -15,10 +15,10 @@
 
   function hanldeClick(event) {
     updateAnswer(answer);
-    const { isCorrectAnswer, entry } = checkAnswer(data, $question, answer);
+    const isCorrectAnswer = checkAnswer(data, $question, answer);
     if (isCorrectAnswer)
       dispatch("answer", {
-        answer: entry,
+        answer: getEntry(data, $question),
       });
   }
 </script>

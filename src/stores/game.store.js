@@ -1,6 +1,6 @@
 import { readable, writable, derived, get } from 'svelte/store'
 import { feature } from 'topojson';
-import {json} from "d3-fetch";
+import { json } from "d3-fetch";
 
 import { randomFromData } from "../utils";
 
@@ -41,26 +41,26 @@ function generateData() {
 
 function getGeoData() {
   let dataset = { features: [] }
-    json(
-        "islands-simplified.json"
-      ).then((data) => {
-          let geojson = feature(data, data.objects.land)
-          greece.set([geojson])
-        });
-    json(
-        "islands.json"
-      ).then((data) => {
-          let land = feature(data, data.objects.land)
-          let shallow_water = feature(data, data.objects.shallow_water)
-          let deep_water = feature(data, data.objects.deep_water)
-          islands.set(land.features.map((d, i) => {
-              return {
-                  land: d,
-                  shallow_water: shallow_water.features[i],
-                  deep_water: deep_water.features[i],
-                }
-          }))
-        });
+  json(
+    "islands-simplified.json"
+  ).then((data) => {
+    let geojson = feature(data, data.objects.land)
+    greece.set([geojson])
+  });
+  json(
+    "islands.json"
+  ).then((data) => {
+    let land = feature(data, data.objects.land)
+    let shallow_water = feature(data, data.objects.shallow_water)
+    let deep_water = feature(data, data.objects.deep_water)
+    islands.set(land.features.map((d, i) => {
+      return {
+        land: d,
+        shallow_water: shallow_water.features[i],
+        deep_water: deep_water.features[i],
+      }
+    }))
+  });
 }
 
 function reinitializeStore(state) {
@@ -83,20 +83,24 @@ setup()
 
 export const currentStep = derived([steps, stepIndex], ([$steps, $stepIndex]) => $steps[$stepIndex])
 
-export const next = function() {
+export const next = function () {
   stepIndex.update(n => n + 1);
   if (get(stepIndex) == 1) {
     selectedData.set(randomFromData(get(data)));
   }
 }
-export const prev = function() {
+export const prev = function () {
   if (get(stepIndex) < 1) return;
   stepIndex.update(n => n - 1);
   if (get(stepIndex) == 0) {
     selectedData.set([]);
   }
 }
-export const restart = function() {
+export const restart = function () {
   selectedData.set([]);
   setup();
+}
+
+export function updateAnswer(data) {
+  answer.set(data)
 }

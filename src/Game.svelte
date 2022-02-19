@@ -21,7 +21,6 @@
   }
 
   function handleAnswer(event) {
-    setAnswer(event.detail.answer);
     next();
   }
 
@@ -38,7 +37,7 @@
   {#if $stepIndex < 4}
   <Data {width} {height} />
   {:else}
-    <Question/>
+    <Question on:answer={handleAnswer}/>
   {/if}
 </main>
 

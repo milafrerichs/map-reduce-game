@@ -1,33 +1,31 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { checkData, getEntry } from "./utils/data.js";
+  import { checkAnswer, getEntry } from "./utils/data.js";
   import Table from "./TableV2.svelte";
-  import SunIcon from "./icons/Sun.icon.svelte";
   import SunComponent from "./Sun.svelte";
   import CloudsAndRainIcon from "./icons/CloudsAndRain.icon.svelte";
   import ThermometerIcon from "./icons/Thermometer.icon.svelte";
 
-  import { selectedData, question } from "./stores/game.store";
+  import { selectedData, question, updateAnswer } from "./stores/game.store";
 
   const dispatch = createEventDispatcher();
   $: data = $selectedData;
 
   let answer;
 
-  function checkAnswer(event) {
-    let correct = checkData(data, $question, answer);
-    dispatch("answer", {
-      answer: getEntry(data, $question),
-    });
+  function hanldeClick(event) {
+    updateAnswer(answer);
+    const { isCorrectAnswer, entry } = checkAnswer(data, $question, answer);
+    if (isCorrectAnswer)
+      dispatch("answer", {
+        answer: entry,
+      });
   }
 </script>
 
 <div class="m-auto h-full bg-app-teal-500 overflow-y-auto">
   <div class="max-w-7xl mx-auto overflow-y-auto">
-    <SunComponent
-      month={$question.month}
-      colors={["#F7CF52", "#F4581B"]}
-    />
+    <SunComponent month={$question.month} colors={["#F7CF52", "#F4581B"]} />
     <div
       class="h-full w-full items-center question-grid mx-auto bg-app-teal-500"
     >
@@ -54,9 +52,9 @@
           <td>200</td>
         </svelte:fragment>
       </Table>
-
       <button
         class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-app-teal-300 bg-app-teal-400 py-1 rounded-none"
+        on:click={hanldeClick}
       >
         Provide your answer
       </button>

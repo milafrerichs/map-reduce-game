@@ -29,10 +29,8 @@ export function checkAnswer(data, question, answer = '') {
   const entry = getEntry(data, question);
   const island = entry.island;
   const value = entry[question.column];
-  const answerLength = `${island}:${value}`.length
   const regex = new RegExp(`(${island})(?:.*)(${value})`, 'i');
-  const matches = regex.test(answer)
-  return matches && answer.length === answerLength
+  return regex.test(answer)
 }
 
 

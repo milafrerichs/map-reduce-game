@@ -27,14 +27,12 @@ export function getResults(data, question) {
 
 export function checkAnswer(data, question, answer = '') {
   const entry = getEntry(data, question);
-  const { island, temp } = entry;
-  const answerLength = `${island}:${temp}`.length
-  const regex = new RegExp(`(${island})(?:.*)(${temp})`, 'i');
+  const island = entry.island;
+  const value = entry[question.column];
+  const answerLength = `${island}:${value}`.length
+  const regex = new RegExp(`(${island})(?:.*)(${value})`, 'i');
   const matches = regex.test(answer)
-  return {
-    isCorrectAnswer: matches && answer.length === answerLength,
-    entry
-  };
+  return matches && answer.length === answerLength
 }
 
 

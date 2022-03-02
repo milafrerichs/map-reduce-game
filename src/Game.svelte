@@ -6,11 +6,12 @@
   import Answer from './Answer.svelte';
   import Step from './Step.svelte';
   import { fade } from 'svelte/transition';
-  import { currentStep, greece, islands, question as questionStore, data as dataStore, stepIndex, next, prev, restart } from "./stores/game.store";
+  import { currentStep, greece, islands, question as questionStore, data as dataStore, settings as gameSettings, stepIndex, next, prev, restart } from "./stores/game.store";
   let width;
   let height;
   export let question;
   export let data;
+  export let settings;
 
   function animateOnlySelected() {
     onlySelected = true;
@@ -33,6 +34,10 @@
 
   $: if(data) {
     dataStore.set(data)
+  }
+
+  $: if(settings) {
+    gameSettings.set(settings)
   }
 
   onMount(() => {

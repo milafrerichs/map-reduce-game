@@ -11,6 +11,7 @@ export const islands = writable([]);
 export const selectedData = writable([]);
 export const question = writable({});
 export const answer = writable("");
+export const settings = writable({});
 export const steps = readable(["greece", "islands", "dots", "dots-selected", "oneRow", "oneCol", "table"]);
 
 
@@ -54,7 +55,8 @@ export const currentStep = derived([steps, stepIndex], ([$steps, $stepIndex]) =>
 export const next = function() {
   stepIndex.update(n => n + 1);
   if (get(stepIndex) == 1) {
-    selectedData.set(randomFromData(get(data), get(question), 20));
+    let sett = get(settings);
+    selectedData.set(randomFromData(get(data), get(question), sett.answerDataSize));
   }
 }
 export const prev = function() {

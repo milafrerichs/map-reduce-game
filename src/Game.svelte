@@ -6,18 +6,20 @@
   import Answer from './Answer.svelte';
   import Step from './Step.svelte';
   import { fade } from 'svelte/transition';
-  import { currentStep, greece, islands, question, stepIndex, next, prev, restart } from "./stores/game.store";
+  import { currentStep, greece, islands, question as questionStore, data as dataStore, stepIndex, next, prev, restart } from "./stores/game.store";
   let width;
   let height;
+  export let question;
+  export let data;
 
   function animateOnlySelected() {
-      onlySelected = true;
+    onlySelected = true;
   }
   function animateSelected() {
     highlight = true;
   }
   function animateToTable() {
-      table = true;
+    table = true;
   }
 
   function handleAnswer(event) {
@@ -25,10 +27,17 @@
     next();
   }
 
+  $: if(question) {
+    questionStore.set(question)
+  }
+
+  $: if(data) {
+    dataStore.set(data)
+  }
+
   onMount(() => {
     window.addEventListener('mrGame:next', e => next());
     window.addEventListener('mrGame:prev', e => prev());
-    selected = randomFromData(data)
     window.addEventListener("mrGame:restart", (e) => restart());
   })
 

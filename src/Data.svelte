@@ -11,7 +11,6 @@
   let useGrid = false;
   let activeData;
 
-
   let steps = [
       {
           name: "greece",
@@ -42,7 +41,7 @@
           useGrid: true,
           component: Dot,
           size: 20,
-          props: { radius: 5, selected: $selectedData }
+          props: { radius: 5, highlightSelected: true, selectedColor: "red" }
         },
     ]
 

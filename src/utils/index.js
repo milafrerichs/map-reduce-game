@@ -17,13 +17,34 @@ export function randomFromDataWithInclude(data, shouldInclude, dataItems=10) {
   // if randomData does not one of shouldBeIncluded, remove one from randomData and add one from shouldBeIncluded
 
 }
-export function randomFromData(data, dataItems=10) {
+function randomDataWithGaussian(data, dataItems) {
   let selected = [];
   for(let i=0;i<dataItems;i++) {
     const randomIndex = randomGaussian(data.length);
     selected.push(data[randomIndex]);
   }
   return selected;
+
+}
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+  return array;
+}
+
+export function randomFromData(data, question, dataItems=10) {
+  let filteredData = data.filter(question.filter)
+  let monthItems = Math.ceil(dataItems / 2)
+  let rest = dataItems - monthItems;
+  let intersection = data.filter(x => !filteredData.includes(x));
+  let selected = randomDataWithGaussian(filteredData, monthItems)
+  selected = selected.concat(randomDataWithGaussian(intersection, rest))
+  return shuffle(selected);
 }
 
 export function randomInChunks(data, chunks=10) {

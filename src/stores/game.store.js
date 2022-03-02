@@ -54,7 +54,7 @@ export const currentStep = derived([steps, stepIndex], ([$steps, $stepIndex]) =>
 export const next = function() {
   stepIndex.update(n => n + 1);
   if (get(stepIndex) == 1) {
-    selectedData.set(randomFromData(get(data)));
+    selectedData.set(randomFromData(get(data), get(question), 20));
   }
 }
 export const prev = function() {

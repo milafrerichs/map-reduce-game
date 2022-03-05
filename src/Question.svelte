@@ -23,11 +23,13 @@
 </script>
 
 <div class="m-auto h-full bg-app-teal-500 overflow-y-auto">
-  <div class="max-w-7xl mx-auto overflow-y-auto">
+  <div class="h-24 max-w-7xl mx-auto">
     <SunComponent
       month={$question.month}
       colors={["#F7CF52", "#F4581B"]}
     />
+  </div>
+  <div class="max-w-7xl mx-auto overflow-y-auto">
     <div
       class="h-full w-full items-center question-grid mx-auto bg-app-teal-500"
     >

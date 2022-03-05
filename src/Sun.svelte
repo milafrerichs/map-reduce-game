@@ -12,6 +12,7 @@
   let path;
 
   let width;
+  let height;
 
   onMount(() => {
     let monthIndex = 1 + MONTHS.findIndex((m) => m === month) ?? 0;
@@ -30,8 +31,8 @@
 </script>
 
 <template>
-  <div bind:clientWidth={width}>
-    <svg {width} viewBox="0 0 390.78 89.51">
+  <div class="h-full w-full" bind:clientWidth={width} bind:clientHeight={height}>
+    <svg {width} {height} viewBox="0 0 390.78 89.51">
       <g id="Layer_2" data-name="Layer 2">
         <g id="Layer_1-2" data-name="Layer 1">
           <g bind:this={sun}>

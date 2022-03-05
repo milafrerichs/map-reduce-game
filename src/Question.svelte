@@ -2,24 +2,28 @@
   import { createEventDispatcher } from "svelte";
   import { checkAnswer, getEntry } from "./utils/data.js";
   import Table from "./TableV2.svelte";
+  import { updateAnswer } from "./stores/game.store";
   import SunComponent from "./Sun.svelte";
   import CloudsAndRainIcon from "./icons/CloudsAndRain.icon.svelte";
   import ThermometerIcon from "./icons/Thermometer.icon.svelte";
-
-  import { selectedData, question, updateAnswer } from "./stores/game.store";
+  import { selectedData, question } from "./stores/game.store";
+  import AnswerModal from "./components/Answer.modal.svelte";
 
   const dispatch = createEventDispatcher();
   $: data = $selectedData;
 
-  let answer;
+  let showAnswerDialog = false;
 
-  function hanldeClick(event) {
+  function verifyAnswer(answer) {
+    return checkAnswer(data, $question, answer);
+  }
+
+  function nextStep(answer) {
     updateAnswer(answer);
-    const isCorrectAnswer = checkAnswer(data, $question, answer);
-    if (isCorrectAnswer)
-      dispatch("answer", {
-        answer: getEntry(data, $question),
-      });
+    showAnswerDialog = false;
+    dispatch("answer", {
+      answer: getEntry(data, $question),
+    });
   }
 </script>
 
@@ -53,14 +57,22 @@
         </svelte:fragment>
       </Table>
       <button
+        on:click={() => (showAnswerDialog = true)}
         class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-app-teal-300 bg-app-teal-400 py-1 rounded-none"
-        on:click={hanldeClick}
       >
         Provide your answer
       </button>
     </div>
   </div>
 </div>
+
+{#if showAnswerDialog}
+  <AnswerModal
+    {verifyAnswer}
+    on:answer={nextStep}
+    on:close={() => (showAnswerDialog = false)}
+  />
+{/if}
 
 <style>
   .question-grid {

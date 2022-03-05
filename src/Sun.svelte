@@ -31,10 +31,10 @@
 
 <template>
   <div bind:clientWidth={width}>
-    <svg {width} viewBox="0 0 390.78 89.51">
+    <svg {width} viewBox="0 0 390.78 89.51" height="200px">
       <g id="Layer_2" data-name="Layer 2">
         <g id="Layer_1-2" data-name="Layer 1">
-          <g bind:this={sun}>
+          <g bind:this={sun} class="sun">
             <circle style="fill:{colors[0]}" cx="28.24" cy="60.68" r="13.96" />
             <rect
               style="fill:{colors[0]}"
@@ -171,3 +171,9 @@
     </svg>
   </div>
 </template>
+
+<style>
+  .sun{
+    transform: scale(0.6);
+  }
+</style>

@@ -68,7 +68,7 @@ describe('#checkAnswer', () => {
     ['Corfu;24', false],
     ['Bali;30', false],
   ])('.checkAnswer(%s)', (answer, expected) => {
-    let result = checkAnswer(answer, data, question);
+    let result = checkAnswer( data, question,answer);
     expect(result).toEqual(expected);
   })
 })

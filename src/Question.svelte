@@ -6,7 +6,7 @@
   import SunComponent from "./Sun.svelte";
   import CloudsAndRainIcon from "./icons/CloudsAndRain.icon.svelte";
   import ThermometerIcon from "./icons/Thermometer.icon.svelte";
-  import { selectedData, question } from "./stores/game.store";
+  import { selectedData, question, next } from "./stores/game.store";
   import AnswerModal from "./components/Answer.modal.svelte";
 
   const dispatch = createEventDispatcher();
@@ -24,6 +24,7 @@
     dispatch("answer", {
       answer: getEntry(data, $question),
     });
+    next()
   }
 </script>
 

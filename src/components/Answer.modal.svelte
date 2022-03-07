@@ -9,11 +9,9 @@
   const dispatch = createEventDispatcher();
 
   function handleAnswer() {
-    console.log("here");
     const correctAnswer = verifyAnswer(answer);
     if (!correctAnswer) {
       wrongAnswerProvided = true;
-      setTimeout(() => (wrongAnswerProvided = false), 3000);
     }
     dispatch("answer", answer);
   }
@@ -35,7 +33,7 @@
         type="text"
         class="p-1 rounded-sm w-full pt-2 bg-white border-2"
         bind:value={answer}
-        placeholder="tokyo:40"
+        placeholder="Your answer"
       />
       {#if wrongAnswerProvided}
         <span class="text-red-400">Wrong answer, please try again.</span>

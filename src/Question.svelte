@@ -9,7 +9,6 @@
   import { selectedData, question, next } from "./stores/game.store";
   import AnswerModal from "./components/Answer.modal.svelte";
 
-  const dispatch = createEventDispatcher();
   $: data = $selectedData;
 
   let showAnswerDialog = false;
@@ -18,13 +17,12 @@
     return checkAnswer(data, $question, answer);
   }
 
-  function nextStep(answer) {
-    updateAnswer(answer);
-    showAnswerDialog = false;
-    dispatch("answer", {
-      answer: getEntry(data, $question),
-    });
-    next()
+  function nextStep(correctAnswer) {
+    if(correctAnswer) {
+      updateAnswer(getEntry(data, $question));
+      showAnswerDialog = false;
+      next();
+    }
   }
 </script>
 

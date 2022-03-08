@@ -50,8 +50,10 @@
 <main class="w-full h-screen" bind:clientWidth={width} bind:clientHeight={height} style="background-color: #66A2AD">
   {#if $stepIndex < 4}
   <Data {width} {height} />
-  {:else}
+  {:else if $stepIndex === 4}
     <Question on:answer={handleAnswer}/>
+  {:else if $stepIndex === 5}
+    <Answers />
   {/if}
 </main>
 

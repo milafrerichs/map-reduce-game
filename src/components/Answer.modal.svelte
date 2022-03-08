@@ -13,7 +13,7 @@
     if (!correctAnswer) {
       wrongAnswerProvided = true;
     }
-    dispatch("answer", answer);
+    dispatch("answer", correctAnswer);
   }
 
   function handleClose() {

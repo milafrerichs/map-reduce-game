@@ -1,9 +1,9 @@
 <script>
-  import { checkData, getResults } from './utils/data.js';
+  import { checkData, getResults, getEntry } from './utils/data.js';
   import { chunkArray } from './utils'
   import Table from './TableV2.svelte';
   import ThermometerIcon from "./icons/Thermometer.icon.svelte";
-  import { data, answer, question } from "./stores/game.store";
+  import { data, answer, question, result } from "./stores/game.store";
 
     export let columns = [
         {key: 'island', name: 'Island'},
@@ -13,10 +13,14 @@
   let answers = [];
 
   $: if($data) {
-    answers.push($answer)
+    if($answer.hasOwnProperty("island")) {
+      answers.push($answer)
+    }
     let chunkData = chunkArray($data, 400)
-    answers = chunkData.map((d) => getResults(d, $question)[0])
-    answers.filter((d) => !d)
+    let otheranswers = chunkData.map((d) => getResults(d, $question)[0])
+    otheranswers.filter((d) => !d)
+    answers = answers.concat(otheranswers)
+    result.set(getEntry(answers, $question))
   }
 </script>
 <div class="m-auto max-w-7xl h-full">

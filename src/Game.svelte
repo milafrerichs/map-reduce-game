@@ -3,7 +3,7 @@
   import Data from './Data.svelte';
   import Question from './Question.svelte';
   import Answers from './Answers.svelte';
-  import Answer from './Answer.svelte';
+  import Result from './Result.svelte';
   import Step from './Step.svelte';
   import { fade } from 'svelte/transition';
   import { currentStep, greece, islands, question as questionStore, data as dataStore, settings as gameSettings, stepIndex, next, prev, restart } from "./stores/game.store";
@@ -54,6 +54,8 @@
     <Question on:answer={handleAnswer}/>
   {:else if $stepIndex === 5}
     <Answers />
+  {:else }
+    <Result />
   {/if}
 </main>
 

@@ -9,6 +9,8 @@
   import { selectedData, question, next } from "./stores/game.store";
   import AnswerModal from "./components/Answer.modal.svelte";
 
+  const dispatch = createEventDispatcher();
+
   $: data = $selectedData;
 
   let showAnswerDialog = false;
@@ -21,7 +23,9 @@
     if(correctAnswer) {
       updateAnswer(getEntry(data, $question));
       showAnswerDialog = false;
-      next();
+      dispatch('mr:correctAnswer', {
+        text: correctAnswer
+      });
     }
   }
 </script>

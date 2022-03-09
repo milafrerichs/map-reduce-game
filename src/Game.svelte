@@ -46,8 +46,7 @@
   })
 
 </script>
-
-<main class="w-full h-screen" bind:clientWidth={width} bind:clientHeight={height} style="background-color: #66A2AD">
+<main class="w-full h-screen" bind:clientWidth={width} bind:clientHeight={height} class="{$stepIndex < 4 ? ocean : `${$season}-gradient`}">
   {#if $stepIndex < 4}
   <Data {width} {height} />
   {:else if $stepIndex === 4}

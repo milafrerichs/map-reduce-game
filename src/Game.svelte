@@ -23,10 +23,6 @@
     table = true;
   }
 
-  function handleAnswer(event) {
-    next();
-  }
-
   $: if(question) {
     questionStore.set(question)
   }
@@ -51,7 +47,7 @@
   {#if $stepIndex < 4}
   <Data {width} {height} />
   {:else if $stepIndex === 4}
-    <Question on:answer={handleAnswer}/>
+    <Question />
   {:else if $stepIndex === 5}
     <Answers />
   {:else }

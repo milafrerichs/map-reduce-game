@@ -11,8 +11,9 @@ export const islands = writable([]);
 export const selectedData = writable([]);
 export const question = writable({});
 export const answer = writable("");
+export const result = writable({});
 export const settings = writable({});
-export const steps = readable(["greece", "islands", "dots", "dots-selected", "oneRow", "oneCol", "table"]);
+export const steps = readable(["greece", "islands", "dots", "dots-selected", "table", "answers", "result"]);
 
 
 function getGeoData() {

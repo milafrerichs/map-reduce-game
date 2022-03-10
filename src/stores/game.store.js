@@ -57,7 +57,8 @@ export const next = function () {
   stepIndex.update(n => n + 1);
   if (get(stepIndex) == 1) {
     let sett = get(settings);
-    selectedData.set(randomFromData(get(data), get(question), sett.answerDataSize));
+    const groups = randomFromData(get(data), get(question), 16);
+    selectedData.set(groups[0]);
   }
 }
 export const prev = function () {

@@ -30,24 +30,19 @@
   }
 </script>
 
-<div class="m-auto h-full overflow-y-auto bg-app-teal-500">
+<div class="m-auto h-full overflow-y-auto bg-gradient-sky pb-20">
   <div class="mx-auto h-24 max-w-7xl">
     <SunComponent month={$question.month} colors={["#F7CF52", "#F4581B"]} />
   </div>
-  <div class="mx-auto max-w-7xl overflow-y-auto">
-    <div
-      class="question-grid mx-auto h-full w-full items-center bg-app-teal-500"
-    >
-      <section
-        class="flex items-center justify-center border border-b-0 border-question-heading border-opacity-5 bg-white px-7"
-      >
-        <h2 class="my-8 text-center text-xl">{$question.text}</h2>
+  <div class="mx-auto max-w-4xl overflow-y-auto">
+    <div class="question-grid mx-auto h-full w-full items-center">
+      <section class="flex items-center justify-center px-7">
+        <h2 class="my-8 text-center font-bamboo text-6xl text-app-blue-900">
+          {$question.text}
+        </h2>
       </section>
 
-      <Table
-        {data}
-        classes="border w-full border-question-heading border-opacity-5"
-      >
+      <Table {data} classes=" w-full">
         <svelte:fragment slot="headerColumns">
           <th>Island</th>
           <th>Month</th>
@@ -63,7 +58,7 @@
       </Table>
       <button
         on:click={() => (showAnswerDialog = true)}
-        class="justify-self-end rounded-none border-0 bg-app-teal-400 px-3 py-1 text-sm font-semibold text-black hover:bg-app-teal-300"
+        class="mt-4 justify-self-center rounded border-0 bg-white px-7 pt-4 pb-[1.125rem] font-bamboo text-2xl leading-4 text-app-blue-900 shadow-md transition hover:bg-gray-200"
       >
         Provide your answer
       </button>

@@ -1,12 +1,23 @@
 <script>
-  import { onMount } from 'svelte';
-  import Data from './Data.svelte';
-  import Question from './Question.svelte';
-  import Answers from './Answers.svelte';
-  import Result from './Result.svelte';
-  import Step from './Step.svelte';
-  import { fade } from 'svelte/transition';
-  import { currentStep, greece, islands, question as questionStore, data as dataStore, settings as gameSettings, stepIndex, next, prev, restart } from "./stores/game.store";
+  import { onMount } from "svelte";
+  import Data from "./Data.svelte";
+  import Question from "./Question.svelte";
+  import Answers from "./Answers.svelte";
+  import Result from "./Result.svelte";
+  import Step from "./Step.svelte";
+  import { fade } from "svelte/transition";
+  import {
+    currentStep,
+    greece,
+    islands,
+    question as questionStore,
+    data as dataStore,
+    settings as gameSettings,
+    stepIndex,
+    next,
+    prev,
+    restart,
+  } from "./stores/game.store";
   let width;
   let height;
   export let question;
@@ -23,34 +34,38 @@
     table = true;
   }
 
-  $: if(question) {
-    questionStore.set(question)
+  $: if (question) {
+    questionStore.set(question);
   }
 
-  $: if(data) {
-    dataStore.set(data)
+  $: if (data) {
+    dataStore.set(data);
   }
 
-  $: if(settings) {
-    gameSettings.set(settings)
+  $: if (settings) {
+    gameSettings.set(settings);
   }
 
   onMount(() => {
-    window.addEventListener('mrGame:next', e => next());
-    window.addEventListener('mrGame:prev', e => prev());
+    window.addEventListener("mrGame:next", (e) => next());
+    window.addEventListener("mrGame:prev", (e) => prev());
     window.addEventListener("mrGame:restart", (e) => restart());
-  })
-
+  });
 </script>
 
-<main class="w-full h-screen" bind:clientWidth={width} bind:clientHeight={height} style="background-color: #66A2AD">
+<main
+  class="h-screen w-full"
+  bind:clientWidth={width}
+  bind:clientHeight={height}
+  style="background-color: #66A2AD"
+>
   {#if $stepIndex < 4}
-  <Data {width} {height} />
+    <Data {width} {height} />
   {:else if $stepIndex === 4}
     <Question />
   {:else if $stepIndex === 5}
     <Answers />
-  {:else }
+  {:else}
     <Result />
   {/if}
 </main>

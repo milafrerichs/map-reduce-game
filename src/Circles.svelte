@@ -27,7 +27,7 @@
   let displayedData = data;
 
   $: step = steps[$store.stepIndex];
-  $: selected = $store.selected
+  $: selected = $store.selected;
   $: cols =
     step === "oneCol" || step === "table"
       ? 1

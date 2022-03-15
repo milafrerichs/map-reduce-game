@@ -1,5 +1,5 @@
-import { readable, writable, derived, get } from 'svelte/store'
-import { feature } from 'topojson';
+import { readable, writable, derived, get } from "svelte/store";
+import { feature } from "topojson";
 import { json } from "d3-fetch";
 
 import { randomFromData } from "../utils";
@@ -13,30 +13,35 @@ export const question = writable({});
 export const answer = writable("");
 export const result = writable({});
 export const settings = writable({});
-export const steps = readable(["greece", "islands", "dots", "dots-selected", "table", "answers", "result"]);
-
+export const steps = readable([
+  "greece",
+  "islands",
+  "dots",
+  "dots-selected",
+  "table",
+  "answers",
+  "result",
+]);
 
 function getGeoData() {
-  let dataset = { features: [] }
-  json(
-    "islands-simplified.json"
-  ).then((data) => {
-    let geojson = feature(data, data.objects.land)
-    greece.set([geojson])
+  let dataset = { features: [] };
+  json("islands-simplified.json").then((data) => {
+    let geojson = feature(data, data.objects.land);
+    greece.set([geojson]);
   });
-  json(
-    "islands.json"
-  ).then((data) => {
-    let land = feature(data, data.objects.land)
-    let shallow_water = feature(data, data.objects.shallow_water)
-    let deep_water = feature(data, data.objects.deep_water)
-    islands.set(land.features.map((d, i) => {
-      return {
-        land: d,
-        shallow_water: shallow_water.features[i],
-        deep_water: deep_water.features[i],
-      }
-    }))
+  json("islands.json").then((data) => {
+    let land = feature(data, data.objects.land);
+    let shallow_water = feature(data, data.objects.shallow_water);
+    let deep_water = feature(data, data.objects.deep_water);
+    islands.set(
+      land.features.map((d, i) => {
+        return {
+          land: d,
+          shallow_water: shallow_water.features[i],
+          deep_water: deep_water.features[i],
+        };
+      })
+    );
   });
 }
 
@@ -46,32 +51,37 @@ function setup() {
 }
 
 function reset() {
-  stepIndex.set(0)
+  stepIndex.set(0);
   selectedData.set([]);
 }
-setup()
+setup();
 
-export const currentStep = derived([steps, stepIndex], ([$steps, $stepIndex]) => $steps[$stepIndex])
+export const currentStep = derived(
+  [steps, stepIndex],
+  ([$steps, $stepIndex]) => $steps[$stepIndex]
+);
 
 export const next = function () {
-  stepIndex.update(n => n + 1);
+  stepIndex.update((n) => n + 1);
   if (get(stepIndex) == 1) {
     let sett = get(settings);
-    selectedData.set(randomFromData(get(data), get(question), sett.answerDataSize));
+    selectedData.set(
+      randomFromData(get(data), get(question), sett.answerDataSize)
+    );
   }
-}
+};
 export const prev = function () {
   if (get(stepIndex) < 1) return;
-  stepIndex.update(n => n - 1);
+  stepIndex.update((n) => n - 1);
   if (get(stepIndex) == 0) {
     selectedData.set([]);
   }
-}
+};
 export const restart = function () {
   selectedData.set([]);
   setup();
-}
+};
 
 export function updateAnswer(data) {
-  answer.set(data)
+  answer.set(data);
 }

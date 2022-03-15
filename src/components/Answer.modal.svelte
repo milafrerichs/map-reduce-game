@@ -24,30 +24,30 @@
 <template>
   <div class="wrapper">
     <div
-      class="content bg-app-teal-500 rounded-sm shadow-sm p-4"
+      class="content rounded-sm bg-app-teal-500 p-4 shadow-sm"
       transition:fly={{ y: -20, duration: 300 }}
     >
       <span>Please type in your answer</span>
 
       <input
         type="text"
-        class="p-1 rounded-sm w-full pt-2 bg-white border-2"
+        class="w-full rounded-sm border-2 bg-white p-1 pt-2"
         bind:value={answer}
         placeholder="Your answer"
       />
       {#if wrongAnswerProvided}
         <span class="text-red-400">Wrong answer, please try again.</span>
       {/if}
-      <div class="flex justify-between  w-full pt-2">
+      <div class="flex w-full  justify-between pt-2">
         <button
           on:click={handleClose}
-          class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-app-teal-400 py-1 rounded-none"
+          class="justify-self-end rounded-none border-0 px-3 py-1 text-sm font-semibold text-black hover:bg-app-teal-400"
         >
           Cancel
         </button>
         <button
           on:click={handleAnswer}
-          class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-app-teal-300 bg-app-teal-400 py-1 rounded-none"
+          class="justify-self-end rounded-none border-0 bg-app-teal-400 px-3 py-1 text-sm font-semibold text-black hover:bg-app-teal-300"
         >
           Submit
         </button>

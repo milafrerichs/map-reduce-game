@@ -10,7 +10,8 @@
     "demo": "rollup -c rollup.dev.config.js",
     "start": "sirv public --no-clear",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "format": "npx prettier --write src"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

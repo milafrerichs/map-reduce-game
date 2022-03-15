@@ -83,9 +83,9 @@
   @tailwind components;
   @tailwind utilities;
   :global(.ocean) {
-    background: linear-gradient(-45deg, #587bba, #004567, #22699c, #68ACE1);
+    background: linear-gradient(-45deg, #0597AD, #004567, #0597AD, #004567, #0597AD, #004567,#0597AD, #004567);
     background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    animation: gradient 15s ease-in-out infinite;
     height: 100vh;
   }
   :global(.autum) {

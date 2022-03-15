@@ -20,31 +20,28 @@
   }
 
   function nextStep(correctAnswer) {
-    if(correctAnswer) {
+    if (correctAnswer) {
       updateAnswer(getEntry(data, $question));
       showAnswerDialog = false;
-      dispatch('mr:correctAnswer', {
-        text: correctAnswer
+      dispatch("mr:correctAnswer", {
+        text: correctAnswer,
       });
     }
   }
 </script>
 
-<div class="m-auto h-full bg-app-teal-500 overflow-y-auto">
-  <div class="h-24 max-w-7xl mx-auto">
-    <SunComponent
-      month={$question.month}
-      colors={["#F7CF52", "#F4581B"]}
-    />
+<div class="m-auto h-full overflow-y-auto bg-app-teal-500">
+  <div class="mx-auto h-24 max-w-7xl">
+    <SunComponent month={$question.month} colors={["#F7CF52", "#F4581B"]} />
   </div>
-  <div class="max-w-7xl mx-auto overflow-y-auto">
+  <div class="mx-auto max-w-7xl overflow-y-auto">
     <div
-      class="h-full w-full items-center question-grid mx-auto bg-app-teal-500"
+      class="question-grid mx-auto h-full w-full items-center bg-app-teal-500"
     >
       <section
-        class="bg-white flex items-center justify-center px-7 border border-question-heading border-b-0 border-opacity-5"
+        class="flex items-center justify-center border border-b-0 border-question-heading border-opacity-5 bg-white px-7"
       >
-        <h2 class="text-xl my-8 text-center">{$question.text}</h2>
+        <h2 class="my-8 text-center text-xl">{$question.text}</h2>
       </section>
 
       <Table
@@ -66,7 +63,7 @@
       </Table>
       <button
         on:click={() => (showAnswerDialog = true)}
-        class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-app-teal-300 bg-app-teal-400 py-1 rounded-none"
+        class="justify-self-end rounded-none border-0 bg-app-teal-400 px-3 py-1 text-sm font-semibold text-black hover:bg-app-teal-300"
       >
         Provide your answer
       </button>

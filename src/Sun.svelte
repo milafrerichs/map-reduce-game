@@ -16,8 +16,8 @@
 
   onMount(() => {
     let monthIndex = 1 + MONTHS.findIndex((m) => m === month) ?? 0;
-    let progress = monthIndex/11;
-    let animation = gsap.timeline({paused:true}).to(sun, {
+    let progress = monthIndex / 11;
+    let animation = gsap.timeline({ paused: true }).to(sun, {
       duration: 1,
       ease: "power1.inOut",
       motionPath: {
@@ -31,7 +31,11 @@
 </script>
 
 <template>
-  <div class="h-full w-full" bind:clientWidth={width} bind:clientHeight={height}>
+  <div
+    class="h-full w-full"
+    bind:clientWidth={width}
+    bind:clientHeight={height}
+  >
     <svg {width} {height} viewBox="0 0 390.78 89.51">
       <g id="Layer_2" data-name="Layer 2">
         <g id="Layer_1-2" data-name="Layer 1">

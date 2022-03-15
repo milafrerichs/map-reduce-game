@@ -54,7 +54,7 @@
 </script>
 
 <main
-  class="h-screen w-full"
+  class="h-screen w-full font-sans"
   bind:clientWidth={width}
   bind:clientHeight={height}
   style="background-color: #66A2AD"

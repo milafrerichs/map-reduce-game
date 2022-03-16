@@ -1,12 +1,17 @@
 <script>
-  import { currentStep, question as questionStore, data as dataStore, result } from "./stores/game.store";
+  import {
+    currentStep,
+    question as questionStore,
+    data as dataStore,
+    result,
+  } from "./stores/game.store";
 </script>
-<div class="m-auto h-full bg-app-teal-500 overflow-y-auto">
 
-  <div class="grid place-items-center h-screen">
-    <div class="bg-white p-6 mx-auto max-w-7xl">
+<div class="m-auto h-full overflow-y-auto bg-app-teal-500">
+  <div class="grid h-screen place-items-center">
+    <div class="mx-auto max-w-7xl bg-white p-6">
       <h1>The result after the reduce step is:</h1>
       <p>{$result.island}: {$result.temp}</p>
-  </div>
+    </div>
   </div>
 </div>

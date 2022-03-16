@@ -16,15 +16,13 @@
     answers = getResults(data, question);
   }
 
-    function handleClick(){
-      window.dispatchEvent(
-        new CustomEvent(`mrGame:restart`, { bubbles: true })
-      );
+  function handleClick() {
+    window.dispatchEvent(new CustomEvent(`mrGame:restart`, { bubbles: true }));
   }
 </script>
 
-<div class="m-auto max-w-7xl h-full">
-  <h3 class="text-2xl mb-4">{question.text}</h3>
+<div class="m-auto h-full max-w-7xl">
+  <h3 class="mb-4 text-2xl">{question.text}</h3>
   {#if answers.length > 0}
     <Table data={answers} {columns} />
   {/if}

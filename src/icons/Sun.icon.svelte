@@ -1,14 +1,11 @@
 <script>
   export let colors;
-  export let classes='';
+  export let classes = "";
 </script>
 
 <svg width={100} height={100} class={classes}>
   <g id="Layer_2" data-name="Layer 2">
-    <g
-      id="Layer_1-2"
-      data-name="Layer 1"
-    >
+    <g id="Layer_1-2" data-name="Layer 1">
       <circle style="fill:{colors[0]};" cx="44.92" cy="44.92" r="22.21" />
       <rect
         style="fill:{colors[0]};"
@@ -17,12 +14,7 @@
         width="3.08"
         height="18.42"
       />
-      <rect
-        style="fill:{colors[0]};"
-        x="43.38"
-        width="3.08"
-        height="18.42"
-      />
+      <rect style="fill:{colors[0]};" x="43.38" width="3.08" height="18.42" />
       <rect
         style="fill:{colors[0]};"
         x="10.46"
@@ -39,12 +31,7 @@
         height="3.08"
         transform="translate(6.65 55.38) rotate(-45)"
       />
-      <rect
-        style="fill:{colors[0]};"
-        y="43.38"
-        width="18.42"
-        height="3.08"
-      />
+      <rect style="fill:{colors[0]};" y="43.38" width="18.42" height="3.08" />
       <rect
         style="fill:{colors[0]};"
         x="71.42"

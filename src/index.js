@@ -1,3 +1,3 @@
-import MapReduceGame from './Game.svelte';
+import MapReduceGame from "./Game.svelte";
 
 export default MapReduceGame;

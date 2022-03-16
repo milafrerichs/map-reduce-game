@@ -20,42 +20,36 @@
   }
 
   function nextStep(correctAnswer) {
-    if(correctAnswer) {
+    if (correctAnswer) {
       updateAnswer(getEntry(data, $question));
       showAnswerDialog = false;
-      dispatch('mr:correctAnswer', {
-        text: correctAnswer
+      dispatch("mr:correctAnswer", {
+        text: correctAnswer,
       });
     }
   }
 </script>
 
-<div class="m-auto h-full bg-app-teal-500 overflow-y-auto">
-  <div class="h-24 max-w-7xl mx-auto">
-    <SunComponent
-      month={$question.month}
-      colors={["#F7CF52", "#F4581B"]}
-    />
+<div class="m-auto h-full overflow-y-auto bg-gradient-sky pb-20">
+  <div class="mx-auto h-24 max-w-4xl">
+    <SunComponent month={$question.month} colors={["#F7CF52", "#F4581B"]} />
   </div>
-  <div class="max-w-7xl mx-auto overflow-y-auto">
-    <div
-      class="h-full w-full items-center question-grid mx-auto bg-app-teal-500"
-    >
-      <section
-        class="bg-white flex items-center justify-center px-7 border border-question-heading border-b-0 border-opacity-5"
-      >
-        <h2 class="text-xl my-8 text-center">{$question.text}</h2>
+  <div class="mx-auto max-w-4xl overflow-y-auto">
+    <div class="question-grid mx-auto h-full w-full items-center">
+      <section class="flex items-center justify-center px-7">
+        <h2
+          class="my-8 bg-transparent text-center font-bamboo text-6xl text-app-blue-900"
+        >
+          {$question.text}
+        </h2>
       </section>
 
-      <Table
-        {data}
-        classes="border w-full border-question-heading border-opacity-5"
-      >
+      <Table {data} classes=" w-full">
         <svelte:fragment slot="headerColumns">
           <th>Island</th>
           <th>Month</th>
-          <th><ThermometerIcon classes="h-6" /></th>
-          <th><CloudsAndRainIcon classes="h-6" /></th>
+          <th>Temperature</th>
+          <th>Average Rainfall</th>
         </svelte:fragment>
         <svelte:fragment slot="columns" let:dataAtColumn={row}>
           <td>{row.island}</td>
@@ -66,7 +60,7 @@
       </Table>
       <button
         on:click={() => (showAnswerDialog = true)}
-        class="justify-self-end text-black font-semibold text-sm border-0 px-3 hover:bg-app-teal-300 bg-app-teal-400 py-1 rounded-none"
+        class="mt-4 mb-1 justify-self-center rounded border-0 bg-white px-7 pt-4 pb-[1.125rem] font-bamboo text-2xl leading-4 text-app-blue-900 shadow-md transition hover:bg-gray-200 focus:outline-none focus:ring focus:ring-app-blue-900"
       >
         Provide your answer
       </button>

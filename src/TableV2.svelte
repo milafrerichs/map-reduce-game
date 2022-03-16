@@ -1,40 +1,36 @@
 <script>
   export let data = [];
   export let highlight;
-  export let classes = '';
+  export let classes = "";
 </script>
 
-<div class="bg-[#efebc0] px-8 {classes}">
-  <table class="w-full table">
-    <tr class="header-row">
-      <slot name="headerColumns"/>
-    </tr>
-    {#each data as row, index}
-      <tr class:active={index === highlight} class="">
-        <slot name="columns" dataAtColumn={row} {index}/>
+<div class={classes}>
+  <table class="table w-full border-separate [border-spacing:0px]">
+    <thead
+      class="header-row rounded bg-white text-left text-app-blue-900 shadow-lg"
+    >
+      <tr
+        class="first-child:rounded-l first-child:pl-6 last-child:rounded-r last-child:pr-6 children:border-[1px] children:border-white children:pt-3 children:pb-2.5"
+      >
+        <slot name="headerColumns" />
       </tr>
-    {/each}
+    </thead>
+    <!-- We need a spacing tr here -->
+    <tr class="h-4 w-full" />
+    <tbody>
+      {#each data as row, index}
+        <tr
+          class:active={index === highlight}
+          class="{index === 0
+            ? 'first-child:rounded-tl last-child:rounded-tr'
+            : ''}
+            {index === data.length - 1
+            ? 'first-child:rounded-bl last-child:rounded-br'
+            : ''} odd:bg-gray-100 even:bg-white first-child:pl-6 last-child:pr-6 children:border-[px] children:border-gray-100 children:py-3.5"
+        >
+          <slot name="columns" dataAtColumn={row} {index} />
+        </tr>
+      {/each}
+    </tbody>
   </table>
 </div>
-
-<style global>
-
-  .header-row:first-child th{
-    padding-top: theme('spacing.6');
-    padding-bottom: theme('spacing.5');
-
-  }
-  tr:not(.header-row) td{
-    padding-top: theme('spacing.1');
-    padding-bottom: theme('spacing.1');
-  }
-
-  .table{
-    border-spacing: theme('spacing.4') theme('spacing.6');
-  }
-
-  .table tr th {
-    text-align: left;
-  }
-  
-</style>

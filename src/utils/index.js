@@ -138,7 +138,7 @@ export function chunkArray(inputArray, chunks = 2) {
 }
 
 export function seasons(month) {
-  switch('month') {
+  switch ("month") {
     case "December":
     case "Januar":
     case "Februar":
@@ -152,10 +152,10 @@ export function seasons(month) {
     case "August":
       return "summer";
     case "September":
-    case "October": 
+    case "October":
     case "November":
       return "fall";
     default:
-      return "summer";  
+      return "summer";
   }
-} 
+}

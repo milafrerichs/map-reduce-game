@@ -24,7 +24,7 @@
   }
 </script>
 
-<div class="m-auto h-full overflow-y-auto bg-gradient-sunset">
+<div class="m-auto h-full overflow-y-auto">
   <!-- TODO: Add sun component -->
 
   <div class="question-grid mx-auto h-full w-full max-w-4xl items-center">

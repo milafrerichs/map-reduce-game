@@ -138,10 +138,10 @@ export function chunkArray(inputArray, chunks = 2) {
 }
 
 export function seasons(month) {
-  switch ("month") {
+  switch (month) {
     case "December":
-    case "Januar":
-    case "Februar":
+    case "January":
+    case "February":
       return "winter";
     case "March":
     case "April":

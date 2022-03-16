@@ -24,6 +24,8 @@ module.exports = {
       backgroundImage: {
         "gradient-sky":
           "linear-gradient(180deg, #BCDAFC 0%, #A1CFF3 48.93%, #68ACE1 100%)",
+        "gradient-sunset":
+          "linear-gradient(180deg, #BD8CD0 0%, #F19183 48.93%, #FFC975 100%)",
       },
     },
   },

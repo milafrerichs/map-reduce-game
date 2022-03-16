@@ -2,7 +2,7 @@ import { readable, writable, derived, get } from 'svelte/store'
 import { feature } from 'topojson';
 import { json } from "d3-fetch";
 
-import { randomFromData } from "../utils";
+import { randomSelectedFromData, randomFromData } from "../utils";
 
 export const stepIndex = writable(0);
 export const data = writable([]);
@@ -52,13 +52,15 @@ function reset() {
 setup()
 
 export const currentStep = derived([steps, stepIndex], ([$steps, $stepIndex]) => $steps[$stepIndex])
+export const questionData = derived([data, question], ([$data, $question]) => $data.filter($question.filter))
 
 export const next = function () {
   stepIndex.update(n => n + 1);
   if (get(stepIndex) == 1) {
     let sett = get(settings);
-    const groups = randomFromData(get(data), get(question), 16);
-    selectedData.set(groups[0]);
+    const selected = randomSelectedFromData(get(data), get(questionData), 16);
+    const groups = randomFromData(get(data), get(questionData), selected, 16);
+    selectedData.set(selected);
   }
 }
 export const prev = function () {

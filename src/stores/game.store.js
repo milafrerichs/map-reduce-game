@@ -9,6 +9,7 @@ export const data = writable([]);
 export const greece = writable([]);
 export const islands = writable([]);
 export const selectedData = writable([]);
+export const groupedData = writable([]);
 export const question = writable({});
 export const answer = writable("");
 export const result = writable({});
@@ -61,6 +62,7 @@ export const next = function () {
     const selected = randomSelectedFromData(get(data), get(questionData), 16);
     const groups = randomFromData(get(data), get(questionData), selected, 16);
     selectedData.set(selected);
+    groupedData.set(groups);
   }
 }
 export const prev = function () {

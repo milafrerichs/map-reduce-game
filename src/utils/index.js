@@ -60,31 +60,29 @@ function randomIndexWithRetries(data, per){
 }
 
 
-export function randomFromData(data, questionData, selected, itemsPerGroup = 10) {
+export function randomFromData(data, questionData, selected, numberOfGroups = 10) {
   const a = new Set(data);
   const b = new Set(selected);
   const difference = new Set(
     Array.from(a).filter(x => !b.has(x))
   );
 
-  const colCount = Math.ceil(data.length / itemsPerGroup) - 1;
-  const answersPerGroupCount = Math.ceil(questionData.length / colCount) - 1;
-  let groups = Array.from({ length: colCount }, () => []);
+  const answersPerGroupCount = Math.ceil(questionData.length / numberOfGroups );
+  const itemsPerGroup = Math.ceil(difference.size / numberOfGroups);
+  let groups = Array.from({ length: numberOfGroups }, () => []);
   const leftOvers = [];
-  //
-  // insert at least one correct answer
-  questionData.forEach(group => {
-    let missingEntries = itemsPerGroup - group.length;
-    for(let i=0;i<missingEntries;i++) {
+  groups = groups.map(group => {
+    for(let i=0;i<answersPerGroupCount;i++) {
       const rIndex = randomIndex(questionData.length);
       let q = questionData.splice(rIndex, 1)
       group = group.concat(q);
     }
+    return group;
   })
 
 
   difference.forEach((datum, i) => {
-    let rIndex= randomGaussian(groups.length);
+    let rIndex= randomIndex(groups.length);
     let tries = 0;
     while(groups[rIndex].length >= (itemsPerGroup-1)) {
       rIndex = randomIndex(groups.length);
@@ -93,7 +91,7 @@ export function randomFromData(data, questionData, selected, itemsPerGroup = 10)
         break;
       }
     }
-    if(tries > groups.length*4 || groups[rIndex].length >= (itemsPerGroup-1)) {
+    if(tries > groups.length*4 || groups[rIndex].length >= (itemsPerGroup)) {
       leftOvers.push(datum)
     } else {
       groups[rIndex].push(datum);
@@ -103,7 +101,7 @@ export function randomFromData(data, questionData, selected, itemsPerGroup = 10)
   const lastGroup = groups[groups.length - 1];
   lastGroup.concat(leftOvers.splice(0, itemsPerGroup - lastGroup.length));
 
-  return groups.map(group => shuffle(group));
+  return groups;
 }
 
 export function randomInChunks(data, chunks = 10) {

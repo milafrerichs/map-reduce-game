@@ -5,7 +5,7 @@
 <div
   transition:fade
   class="absolute top-0 h-full w-full"
-  style="background: #66A2AD"
+  style="background: #22699C"
 >
   <slot />
 </div>

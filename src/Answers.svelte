@@ -24,22 +24,23 @@
   }
 </script>
 
-<div class="m-auto h-full max-w-7xl">
-  <div class="question-grid mx-auto h-full w-full items-center bg-app-teal-500">
-    <section
-      class="flex items-center justify-center border border-b-0 border-question-heading border-opacity-5 bg-white px-7"
-    >
-      <h2 class="my-8 text-center text-xl">Answers from all mappers</h2>
+<div class="m-auto h-full overflow-y-auto bg-gradient-sunset">
+  <!-- TODO: Add sun component -->
+
+  <div class="question-grid mx-auto h-full w-full max-w-4xl items-center">
+    <section class="flex items-center justify-center px-7">
+      <h2
+        class="my-8 bg-transparent text-center font-bamboo text-6xl text-white"
+      >
+        Answers from all mappers
+      </h2>
     </section>
     {#if answers.length > 0}
-      <Table
-        data={answers}
-        classes="border w-full border-question-heading border-opacity-5"
-      >
+      <Table data={answers} classes="w-full pb-20">
         <svelte:fragment slot="headerColumns">
           <th>Island</th>
           <th>Month</th>
-          <th><ThermometerIcon classes="h-6" /></th>
+          <th>Temperature</th>
         </svelte:fragment>
         <svelte:fragment slot="columns" let:dataAtColumn={row}>
           <td>{row.island}</td>

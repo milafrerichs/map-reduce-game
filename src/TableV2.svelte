@@ -24,9 +24,9 @@
           class="{index === 0
             ? 'first-child:rounded-tl last-child:rounded-tr'
             : ''}
-          {index === data.length - 1
+            {index === data.length - 1
             ? 'first-child:rounded-bl last-child:rounded-br'
-            : ''} odd:bg-gray-100 even:bg-white first-child:pl-6 last-child:pr-6 children:border-[px] children:border-gray-100 children:py-4"
+            : ''} odd:bg-gray-100 even:bg-white first-child:pl-6 last-child:pr-6 children:border-[px] children:border-gray-100 children:py-3.5"
         >
           <slot name="columns" dataAtColumn={row} {index} />
         </tr>

@@ -29,12 +29,9 @@ export const theme = writable({
     secondary: "",
     tertiary: "",
   },
-  spring: {
-  },
-  fall: {
-  },
-  winter: {
-  }
+  spring: {},
+  fall: {},
+  winter: {},
 });
 
 function getGeoData() {
@@ -79,13 +76,21 @@ export const currentStep = derived(
   ([$steps, $stepIndex]) => $steps[$stepIndex]
 );
 
-export const currentMonth = derived([question], ([$question]) => $question.month);
+export const currentMonth = derived(
+  [question],
+  ([$question]) => $question.month
+);
 
-export const currentSeason = derived([currentMonth], ([$currentMonth]) => seasons($currentMonth));
+export const currentSeason = derived([currentMonth], ([$currentMonth]) =>
+  seasons($currentMonth)
+);
 
-export const currentTheme = derived([settings, currentSeason], ([$settings, $currentSeason]) => {
-  return
-});
+export const currentTheme = derived(
+  [settings, currentSeason],
+  ([$settings, $currentSeason]) => {
+    return;
+  }
+);
 
 export const next = function () {
   stepIndex.update((n) => n + 1);

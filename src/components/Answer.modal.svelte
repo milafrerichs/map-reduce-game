@@ -1,6 +1,7 @@
 <script>
   import { fly } from "svelte/transition";
   import { createEventDispatcher } from "svelte";
+  import { question } from "../stores/data.store";
 
   export let verifyAnswer;
 
@@ -14,8 +15,9 @@
     const correctAnswer = verifyAnswer(answer);
     if (!correctAnswer) {
       wrongAnswerProvided = true;
+    } else {
+      dispatch("answer", correctAnswer);
     }
-    dispatch("answer", correctAnswer);
   }
 
   function handleClose() {
@@ -62,7 +64,7 @@
       </button>
 
       <h3 class="text-center font-bamboo text-2xl text-app-blue-900">
-        The island with the highest temperature in September is ...
+        The island with the {$question.typeText} in {$question.month} is ...
       </h3>
 
       <div class="mx-auto w-full max-w-xl">
@@ -75,22 +77,6 @@
             class="mt-5 w-full rounded border border-gray-400 bg-gray-100 px-6 pt-4 pb-3.5 text-2xl text-app-blue-900 focus:outline-none focus:ring focus:ring-app-blue-900"
             bind:value={answer}
             placeholder="Your Answer"
-          />
-        </div>
-
-        <div class="mt-10">
-          <label
-            for="name"
-            class="text-center font-bamboo text-2xl text-app-blue-900"
-            >Your name:</label
-          >
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="mt-5 w-full rounded border border-gray-400 bg-gray-100 px-6 pt-4 pb-3.5 text-2xl text-app-blue-900 focus:outline-none focus:ring focus:ring-app-blue-900"
-            bind:value={name}
-            placeholder="Your Name"
           />
         </div>
 

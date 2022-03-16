@@ -1,5 +1,5 @@
 <script>
-  import { selectedData } from "./stores/game.store";
+  import { selectedData } from "./stores/data.store";
   export let radius = 5;
   export let color = "#efebc0";
   export let data = {};

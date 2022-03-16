@@ -6,7 +6,8 @@
   import SunComponent from "./Sun.svelte";
   import CloudsAndRainIcon from "./icons/CloudsAndRain.icon.svelte";
   import ThermometerIcon from "./icons/Thermometer.icon.svelte";
-  import { selectedData, question, next } from "./stores/game.store";
+  import { next } from "./stores/game.store";
+  import { selectedData, question } from "./stores/data.store";
   import AnswerModal from "./components/Answer.modal.svelte";
 
   const dispatch = createEventDispatcher();
@@ -30,15 +31,15 @@
   }
 </script>
 
-<div class="m-auto h-full overflow-y-auto pb-20">
+<div class="m-auto h-full pb-20">
   <div class="mx-auto h-24 max-w-4xl">
     <SunComponent month={$question.month} colors={["#F7CF52", "#F4581B"]} />
   </div>
-  <div class="mx-auto max-w-4xl overflow-y-auto">
+  <div class="-mt-16 mx-auto max-w-4xl">
     <div class="question-grid mx-auto h-full w-full items-center">
       <section class="flex items-center justify-center px-7">
         <h2
-          class="my-8 bg-transparent text-center font-bamboo text-6xl text-app-blue-900"
+          class="my-8 bg-transparent text-center font-bamboo text-3xl text-app-blue-900"
         >
           {$question.text}
         </h2>
@@ -49,13 +50,11 @@
           <th>Island</th>
           <th>Month</th>
           <th>Temperature</th>
-          <th>Average Rainfall</th>
         </svelte:fragment>
         <svelte:fragment slot="columns" let:dataAtColumn={row}>
           <td>{row.island}</td>
           <td>{row.month}</td>
           <td>{row.temp}</td>
-          <td>200</td>
         </svelte:fragment>
       </Table>
       <button

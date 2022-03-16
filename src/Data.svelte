@@ -7,10 +7,12 @@
   import {
     greece,
     islands,
-    data,
-    selectedData,
     stepIndex,
   } from "./stores/game.store";
+  import {
+    data,
+    selectedData,
+  } from "./stores/data.store";
 
   export let width;
   export let height;

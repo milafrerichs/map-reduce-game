@@ -3,17 +3,18 @@ import { feature } from "topojson";
 import { json } from "d3-fetch";
 
 import { randomSelectedFromData, randomFromData, seasons } from "../utils";
+import { getResults } from "../utils/data.js";
 
-export const stepIndex = writable(0);
-export const data = writable([]);
+export const stepIndex = writable(3);
 export const greece = writable([]);
 export const islands = writable([]);
-export const selectedData = writable([]);
-export const groupedData = writable([]);
 export const question = writable({});
 export const answer = writable("");
 export const result = writable({});
-export const settings = writable({});
+export const settings = writable({
+  answerDataSize: 16,
+  groups: 16
+});
 export const steps = readable([
   "greece",
   "islands",
@@ -63,13 +64,8 @@ function setup() {
 
 function reset() {
   stepIndex.set(0);
-  selectedData.set([]);
 }
 setup();
-
-export const questionData = derived([data, question], ([$data, $question]) =>
-  $data.filter($question.filter)
-);
 
 export const currentStep = derived(
   [steps, stepIndex],
@@ -94,27 +90,12 @@ export const currentTheme = derived(
 
 export const next = function () {
   stepIndex.update((n) => n + 1);
-  if (get(stepIndex) == 1) {
-    let sett = get(settings);
-    const selected = randomSelectedFromData(
-      get(data),
-      get(questionData),
-      sett.answerDataSize
-    );
-    const groups = randomFromData(get(data), get(questionData), selected, 16);
-    selectedData.set(selected);
-    groupedData.set(groups);
-  }
 };
 export const prev = function () {
   if (get(stepIndex) < 1) return;
   stepIndex.update((n) => n - 1);
-  if (get(stepIndex) == 0) {
-    selectedData.set([]);
-  }
 };
 export const restart = function () {
-  selectedData.set([]);
   setup();
 };
 

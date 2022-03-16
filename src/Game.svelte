@@ -11,8 +11,6 @@
     currentStep,
     greece,
     islands,
-    question as questionStore,
-    data as dataStore,
     settings as gameSettings,
     stepIndex,
     next,
@@ -20,6 +18,10 @@
     restart,
     currentSeason,
   } from "./stores/game.store";
+  import {
+    question as questionStore,
+    data as dataStore,
+  } from "./stores/data.store";
   let width;
   let height;
   export let question;
@@ -46,11 +48,6 @@
 
   $: if (settings) {
     gameSettings.set(settings);
-  }
-
-  function backgroundGradien() {
-
-      return 
   }
 
   onMount(() => {
@@ -85,7 +82,7 @@
   :global(.ocean) {
     background: linear-gradient(-45deg, #0597AD, #004567, #0597AD, #004567, #0597AD, #004567,#0597AD, #004567);
     background-size: 400% 400%;
-    animation: gradient 15s ease-in-out infinite;
+    animation: gradient 35s ease-in-out infinite;
     height: 100vh;
   }
 

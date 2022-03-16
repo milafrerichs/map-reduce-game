@@ -17,7 +17,7 @@
     </thead>
     <!-- We need a spacing tr here -->
     <tr class="h-4 w-full" />
-    <tbody>
+    <tbody class="text-sm text-app-blue-900">
       {#each data as row, index}
         <tr
           class:active={index === highlight}

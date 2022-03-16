@@ -57,7 +57,9 @@ function reset() {
 }
 setup();
 
-export const questionData = derived([data, question], ([$data, $question]) => $data.filter($question.filter))
+export const questionData = derived([data, question], ([$data, $question]) =>
+  $data.filter($question.filter)
+);
 
 export const currentStep = derived(
   [steps, stepIndex],
@@ -68,7 +70,11 @@ export const next = function () {
   stepIndex.update((n) => n + 1);
   if (get(stepIndex) == 1) {
     let sett = get(settings);
-    const selected = randomSelectedFromData(get(data), get(questionData), sett.answerDataSize);
+    const selected = randomSelectedFromData(
+      get(data),
+      get(questionData),
+      sett.answerDataSize
+    );
     const groups = randomFromData(get(data), get(questionData), selected, 16);
     selectedData.set(selected);
     groupedData.set(groups);

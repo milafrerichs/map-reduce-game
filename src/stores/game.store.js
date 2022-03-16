@@ -2,7 +2,7 @@ import { readable, writable, derived, get } from "svelte/store";
 import { feature } from "topojson";
 import { json } from "d3-fetch";
 
-import { randomSelectedFromData, randomFromData } from "../utils";
+import { randomSelectedFromData, randomFromData, seasons } from "../utils";
 
 export const stepIndex = writable(0);
 export const data = writable([]);
@@ -23,6 +23,19 @@ export const steps = readable([
   "answers",
   "result",
 ]);
+export const theme = writable({
+  summer: {
+    primary: "",
+    secondary: "",
+    tertiary: "",
+  },
+  spring: {
+  },
+  fall: {
+  },
+  winter: {
+  }
+});
 
 function getGeoData() {
   let dataset = { features: [] };
@@ -65,6 +78,14 @@ export const currentStep = derived(
   [steps, stepIndex],
   ([$steps, $stepIndex]) => $steps[$stepIndex]
 );
+
+export const currentMonth = derived([question], ([$question]) => $question.month);
+
+export const currentSeason = derived([currentMonth], ([$currentMonth]) => seasons($currentMonth));
+
+export const currentTheme = derived([settings, currentSeason], ([$settings, $currentSeason]) => {
+  return
+});
 
 export const next = function () {
   stepIndex.update((n) => n + 1);

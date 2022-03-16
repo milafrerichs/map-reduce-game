@@ -17,6 +17,7 @@
     next,
     prev,
     restart,
+    currentSeason,
   } from "./stores/game.store";
   let width;
   let height;
@@ -54,10 +55,9 @@
 </script>
 
 <main
-  class="h-screen w-full font-sans"
+  class="h-screen w-full font-sans {$stepIndex < 4 ? 'ocean' : `${$currentSeason}-gradient`}"
   bind:clientWidth={width}
   bind:clientHeight={height}
-  style="background-color: #66A2AD"
 >
   {#if $stepIndex < 4}
     <Data {width} {height} />

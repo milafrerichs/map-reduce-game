@@ -136,3 +136,26 @@ export function chunkArray(inputArray, chunks = 2) {
     return resultArray;
   }, []);
 }
+
+export function seasons(month) {
+  switch('month') {
+    case "December":
+    case "Januar":
+    case "Februar":
+      return "winter";
+    case "March":
+    case "April":
+    case "May":
+      return "spring";
+    case "June":
+    case "July":
+    case "August":
+      return "summer";
+    case "September":
+    case "October": 
+    case "November":
+      return "fall";
+    default:
+      return "summer";  
+  }
+} 

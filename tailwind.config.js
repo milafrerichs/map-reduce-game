@@ -20,6 +20,7 @@ module.exports = {
           700: "#3B4F76",
         },
         "question-heading": "#624D4D",
+        'ocean': '#22699C',
       },
       backgroundImage: {
         "gradient-sky":

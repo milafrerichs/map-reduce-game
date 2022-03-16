@@ -10,7 +10,7 @@
       class="header-row rounded bg-white text-left text-app-blue-900 shadow-lg"
     >
       <tr
-        class="first-child:rounded-l first-child:pl-6 last-child:rounded-r last-child:pr-6 children:border-[1px] children:border-white children:pt-3 children:pb-2.5"
+        class="first-child:rounded-l first-child:pl-6 last-child:rounded-r last-child:pr-6 children:border-[1px] children:border-white children:pt-3 children:pb-2"
       >
         <slot name="headerColumns" />
       </tr>
@@ -26,7 +26,7 @@
             : ''}
             {index === data.length - 1
             ? 'first-child:rounded-bl last-child:rounded-br'
-            : ''} odd:bg-gray-100 even:bg-white first-child:pl-6 last-child:pr-6 children:border-[px] children:border-gray-100 children:py-3.5"
+            : ''} odd:bg-gray-100 even:bg-white first-child:pl-6 last-child:pr-6 children:border-[px] children:border-gray-100 children:py-2 text-sm"
         >
           <slot name="columns" dataAtColumn={row} {index} />
         </tr>

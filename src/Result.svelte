@@ -1,10 +1,12 @@
 <script>
   import {
     currentStep,
-    question as questionStore,
-    data as dataStore,
     result,
   } from "./stores/game.store";
+  import {
+    question as questionStore,
+    data as dataStore,
+  } from "./stores/data.store";
 </script>
 
 <div class="m-auto h-full bg-gradient-morning">

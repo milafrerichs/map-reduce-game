@@ -30,7 +30,7 @@
   }
 </script>
 
-<div class="m-auto h-full overflow-y-auto bg-gradient-sky pb-20">
+<div class="m-auto h-full overflow-y-auto pb-20">
   <div class="mx-auto h-24 max-w-4xl">
     <SunComponent month={$question.month} colors={["#F7CF52", "#F4581B"]} />
   </div>

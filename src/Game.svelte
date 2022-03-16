@@ -61,7 +61,7 @@
 </script>
 
 <main
-  class="h-screen w-full font-sans {$stepIndex < 4 ? 'ocean' : `${$currentSeason}-gradient`}"
+  class="h-screen w-full font-sans {$stepIndex < 4 ? 'ocean' : `bg-gradient-${$currentSeason}`}"
   bind:clientWidth={width}
   bind:clientHeight={height}
 >
@@ -88,19 +88,6 @@
     animation: gradient 15s ease-in-out infinite;
     height: 100vh;
   }
-  :global(.autum) {
-    background: rgb(217,221,228);
-    background: linear-gradient(180deg, rgba(217,221,228,1) 0%, rgba(243,199,181,1) 43%, rgba(251,181,147,1) 100%);
-  }
-  :global(.summer) {
-    background: linear-gradient(180deg, #BD8CD0 0%, #F19183 48.93%, #FFC975 100%);
-  }
-  :global(.winter) {
-    background: linear-gradient(180deg, #3956A4 0%, #587BBA 48.93%, #7990C1 100%);
-  }
-  :global(.spring) {
-    background: linear-gradient(180deg, #BCDAFC 0%, #A1CFF3 48.93%, #68ACE1 100%);
-  }
 
   @keyframes gradient {
     0% {
@@ -113,5 +100,4 @@
               background-position: 0% 50%;
     }
   }
-
 </style>

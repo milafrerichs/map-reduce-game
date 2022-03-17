@@ -35,7 +35,7 @@
   <div class="mx-auto h-24 max-w-4xl">
     <SunComponent month={$question.month} colors={["#F7CF52", "#F4581B"]} />
   </div>
-  <div class="-mt-16 mx-auto max-w-4xl">
+  <div class="relative z-20 mx-auto -mt-16 max-w-4xl">
     <div class="question-grid mx-auto h-full w-full items-center">
       <section class="flex items-center justify-center px-7">
         <h2

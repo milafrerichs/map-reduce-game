@@ -9,20 +9,15 @@
   } from "./stores/data.store";
 </script>
 
-<div class="m-auto h-full bg-gradient-morning">
+<div class="m-auto h-full">
   <div class="grid h-full place-items-center">
     <div class="relative">
       <!-- Centered Text Content -->
       <div
         class="absolute inset-0 flex h-full w-full flex-col items-center justify-center px-12 text-center font-bamboo text-app-blue-900"
       >
-        <h1 class="text-6xl uppercase">Your turn</h1>
-        <p class="mt-9 text-4xl">
-          Now it&quot;s your tiurn to answer the question based on your assigned
-          data.
-        </p>
-        <!-- <h1 class="text-6xl">The result after the reduce step is:</h1> -->
-        <!-- <p class="text-4xl">{$result.island}: {$result.temp}</p> -->
+        <h1 class="text-4xl">The result after the reduce step is:</h1> 
+        <p class="text-2xl mt-16">{$result.island}: {$result.temp}</p>
       </div>
 
       <svg

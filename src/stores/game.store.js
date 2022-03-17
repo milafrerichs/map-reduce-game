@@ -4,11 +4,11 @@ import { json } from "d3-fetch";
 
 import { randomSelectedFromData, randomFromData, seasons } from "../utils";
 import { getResults } from "../utils/data.js";
+import { question } from "./data.store.js";
 
-export const stepIndex = writable(3);
+export const stepIndex = writable(0);
 export const greece = writable([]);
 export const islands = writable([]);
-export const question = writable({});
 export const answer = writable("");
 export const result = writable({});
 export const settings = writable({

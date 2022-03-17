@@ -25,8 +25,7 @@
             : ''}
             {index === data.length - 1
             ? 'first-child:rounded-bl last-child:rounded-br'
-            : ''} {index === highlight ? 'bg-app-blue-900 text-white' : 'odd:bg-gray-100 even:bg-white' } first-child:pl-6 last-child:pr-6 children:border-[px] children:border-gray-100 children:py-2 text-sm"
-          class:bg-app-blue-900={index === highlight}
+            : ''} text-sm {index === highlight ? 'bg-app-blue-900 text-white' : 'odd:bg-gray-100 even:bg-white' } first-child:pl-6 last-child:pr-6 children:border-[1px] children:py-2 even-children:border-white odd-children:border-gray-100"
         >
           <slot name="columns" dataAtColumn={row} {index} />
         </tr>

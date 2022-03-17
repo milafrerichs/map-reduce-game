@@ -24,15 +24,19 @@ export const steps = readable([
   "answers",
   "result",
 ]);
-export const theme = writable({
+export const theme = readable({
   summer: {
-    primary: "",
-    secondary: "",
-    tertiary: "",
+    text: "white",
   },
-  spring: {},
-  fall: {},
-  winter: {},
+  spring: {
+    text: "app-blue-900",
+  },
+  fall: {
+    text: "app-blue-900",
+  },
+  winter: {
+    text: "white",
+  },
 });
 
 function getGeoData() {
@@ -81,11 +85,8 @@ export const currentSeason = derived([currentMonth], ([$currentMonth]) =>
   seasons($currentMonth)
 );
 
-export const currentTheme = derived(
-  [settings, currentSeason],
-  ([$settings, $currentSeason]) => {
-    return;
-  }
+export const currentTheme = derived( [theme, currentSeason], ([$theme, $currentSeason]) => 
+  $theme[$currentSeason]
 );
 
 export const next = function () {
@@ -96,7 +97,7 @@ export const prev = function () {
   stepIndex.update((n) => n - 1);
 };
 export const restart = function () {
-  setup();
+  reset();
 };
 
 export function updateAnswer(data) {

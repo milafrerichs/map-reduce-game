@@ -1,6 +1,6 @@
 {
   "name": "map-reduce-game",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "index.js",
   "module": "index.mjs",
   "svelte": "src/index.js",

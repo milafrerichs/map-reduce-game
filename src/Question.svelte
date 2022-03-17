@@ -6,7 +6,7 @@
   import SunComponent from "./Sun.svelte";
   import CloudsAndRainIcon from "./icons/CloudsAndRain.icon.svelte";
   import ThermometerIcon from "./icons/Thermometer.icon.svelte";
-  import { next } from "./stores/game.store";
+  import { next, currentTheme } from "./stores/game.store";
   import { selectedData, question } from "./stores/data.store";
   import AnswerModal from "./components/Answer.modal.svelte";
 
@@ -39,7 +39,7 @@
     <div class="question-grid mx-auto h-full w-full items-center">
       <section class="flex items-center justify-center px-7">
         <h2
-          class="my-8 bg-transparent text-center font-bamboo text-3xl text-app-blue-900"
+            class="my-8 bg-transparent text-center font-bamboo text-3xl text-{$currentTheme.text}"
         >
           {$question.text}
         </h2>

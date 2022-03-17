@@ -16,9 +16,9 @@
     next,
     prev,
     restart,
-    currentSeason,
   } from "./stores/game.store";
   import {
+    currentSeason,
     question as questionStore,
     data as dataStore,
   } from "./stores/data.store";

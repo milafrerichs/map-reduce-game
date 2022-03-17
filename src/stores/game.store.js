@@ -4,7 +4,6 @@ import { json } from "d3-fetch";
 
 import { randomSelectedFromData, randomFromData, seasons } from "../utils";
 import { getResults } from "../utils/data.js";
-import { question } from "./data.store.js";
 
 export const stepIndex = writable(0);
 export const greece = writable([]);
@@ -24,21 +23,6 @@ export const steps = readable([
   "answers",
   "result",
 ]);
-export const theme = readable({
-  summer: {
-    text: "white",
-  },
-  spring: {
-    text: "app-blue-900",
-  },
-  fall: {
-    text: "app-blue-900",
-  },
-  winter: {
-    text: "white",
-  },
-});
-
 function getGeoData() {
   let dataset = { features: [] };
   json("islands-simplified.json").then((data) => {
@@ -74,20 +58,6 @@ setup();
 export const currentStep = derived(
   [steps, stepIndex],
   ([$steps, $stepIndex]) => $steps[$stepIndex]
-);
-
-export const currentMonth = derived(
-  [question],
-  ([$question]) => $question.month
-);
-
-export const currentSeason = derived([currentMonth], ([$currentMonth]) =>
-  seasons($currentMonth)
-);
-
-export const currentTheme = derived(
-  [theme, currentSeason],
-  ([$theme, $currentSeason]) => $theme[$currentSeason]
 );
 
 export const next = function () {

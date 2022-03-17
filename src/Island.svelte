@@ -20,14 +20,14 @@
     d={path(data.deep_water)}
     fill="#8AB7BA"
     stroke="#8AB7BA"
-    style="opacity:0.6; fill-rule: evenodd"
+    style="opacity:0.5; fill-rule: evenodd"
   />
   <path
     stroke-width="1"
     d={path(data.shallow_water)}
     fill="#C0CFC8"
     stroke="#C0CFC8"
-    style="opacity:0.6; fill-rule: evenodd"
+    style="opacity:0.4; fill-rule: evenodd"
   />
   <path
     stroke-width="2"

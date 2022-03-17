@@ -47,6 +47,9 @@ module.exports = {
       addVariant("first-child", "& > :first-child");
       addVariant("last-child", "& > :last-child");
       addVariant("children", "& > *");
+      // we need these for the tables with border radius to avoid artifacts, see: https://stackoverflow.com/questions/4094126/how-to-add-border-radius-on-table-row
+      addVariant("even-children", "&:nth-child(even) > *");
+      addVariant("odd-children", "&:nth-child(odd) > *");
     }),
   ],
 };

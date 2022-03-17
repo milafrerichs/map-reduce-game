@@ -13,7 +13,7 @@ export const answer = writable("");
 export const result = writable({});
 export const settings = writable({
   answerDataSize: 16,
-  groups: 16
+  groups: 16,
 });
 export const steps = readable([
   "greece",
@@ -85,11 +85,13 @@ export const currentSeason = derived([currentMonth], ([$currentMonth]) =>
   seasons($currentMonth)
 );
 
-export const currentTheme = derived( [theme, currentSeason], ([$theme, $currentSeason]) => 
-  $theme[$currentSeason]
+export const currentTheme = derived(
+  [theme, currentSeason],
+  ([$theme, $currentSeason]) => $theme[$currentSeason]
 );
 
 export const next = function () {
+  console.log("next");
   stepIndex.update((n) => n + 1);
 };
 export const prev = function () {

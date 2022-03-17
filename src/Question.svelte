@@ -39,7 +39,7 @@
     <div class="question-grid mx-auto h-full w-full items-center">
       <section class="flex items-center justify-center px-7">
         <h2
-            class="my-8 bg-transparent text-center font-bamboo text-3xl text-{$currentTheme.text}"
+          class="my-8 bg-transparent text-center font-bamboo text-3xl text-{$currentTheme.text}"
         >
           {$question.text}
         </h2>

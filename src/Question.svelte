@@ -6,8 +6,8 @@
   import SunComponent from "./Sun.svelte";
   import CloudsAndRainIcon from "./icons/CloudsAndRain.icon.svelte";
   import ThermometerIcon from "./icons/Thermometer.icon.svelte";
-  import { next, currentTheme } from "./stores/game.store";
-  import { selectedData, question } from "./stores/data.store";
+  import { next } from "./stores/game.store";
+  import { selectedData, question, currentTheme } from "./stores/data.store";
   import AnswerModal from "./components/Answer.modal.svelte";
 
   const dispatch = createEventDispatcher();

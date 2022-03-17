@@ -5,6 +5,21 @@ import { getResults } from "../utils/data.js";
 
 export const data = writable([]);
 export const question = writable({});
+export const theme = readable({
+  summer: {
+    text: "white",
+  },
+  spring: {
+    text: "app-blue-900",
+  },
+  fall: {
+    text: "app-blue-900",
+  },
+  winter: {
+    text: "white",
+  },
+});
+
 
 export const questionData = derived([data, question], ([$data, $question]) =>
   $data.filter($question.filter)
@@ -28,3 +43,18 @@ export const otherAnswers = derived(
     return answers.filter((e, i) => answers.indexOf(e) === i);
   }
 );
+
+export const currentMonth = derived(
+  [question],
+  ([$question]) => $question.month
+);
+
+export const currentSeason = derived([currentMonth], ([$currentMonth]) =>
+  seasons($currentMonth)
+);
+
+export const currentTheme = derived(
+  [theme, currentSeason],
+  ([$theme, $currentSeason]) => $theme[$currentSeason]
+);
+

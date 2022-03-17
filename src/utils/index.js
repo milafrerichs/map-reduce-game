@@ -104,7 +104,7 @@ export function randomFromData(
 
   const lastGroup = groups[groups.length - 1];
   lastGroup.concat(leftOvers.splice(0, itemsPerGroup - lastGroup.length));
-  groups.concat(lastGroup)
+  groups.concat(lastGroup);
 
   return groups;
 }

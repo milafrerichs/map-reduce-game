@@ -5,11 +5,7 @@
   import ThermometerIcon from "./icons/Thermometer.icon.svelte";
   import { answer, result, currentTheme } from "./stores/game.store";
 
-  import {
-    question,
-    data,
-    otherAnswers,
-  } from "./stores/data.store";
+  import { question, data, otherAnswers } from "./stores/data.store";
   export let columns = [
     { key: "island", name: "Island" },
     { key: "month", name: "Month" },

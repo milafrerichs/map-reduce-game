@@ -4,15 +4,8 @@
   import Island from "./Island.svelte";
   import Greece from "./Greece.svelte";
   import Dot from "./Dot.svelte";
-  import {
-    greece,
-    islands,
-    stepIndex,
-  } from "./stores/game.store";
-  import {
-    data,
-    selectedData,
-  } from "./stores/data.store";
+  import { greece, islands, stepIndex } from "./stores/game.store";
+  import { data, selectedData } from "./stores/data.store";
 
   export let width;
   export let height;

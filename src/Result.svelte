@@ -1,8 +1,5 @@
 <script>
-  import {
-    currentStep,
-    result,
-  } from "./stores/game.store";
+  import { currentStep, result } from "./stores/game.store";
   import {
     question as questionStore,
     data as dataStore,
@@ -16,8 +13,8 @@
       <div
         class="absolute inset-0 flex h-full w-full flex-col items-center justify-center px-12 text-center font-bamboo text-app-blue-900"
       >
-        <h1 class="text-4xl">The result after the reduce step is:</h1> 
-        <p class="text-2xl mt-16">{$result.island}: {$result.temp}</p>
+        <h1 class="text-4xl">The result after the reduce step is:</h1>
+        <p class="mt-16 text-2xl">{$result.island}: {$result.temp}</p>
       </div>
 
       <svg

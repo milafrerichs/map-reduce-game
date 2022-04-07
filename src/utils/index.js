@@ -1,3 +1,5 @@
+import { getBeforeAfterMonths } from './data.js';
+
 export function randomGaussian(length, v = 4) {
   // https://riptutorial.com/javascript/example/8330/random--with-gaussian-distribution
   let r = 0;
@@ -43,8 +45,11 @@ function shuffle(array) {
 export function randomSelectedFromData(data, questionData, dataItems = 10) {
   let monthItems = Math.ceil(dataItems / 2);
   let rest = dataItems - monthItems;
-  let intersection = data.filter((x) => !questionData.includes(x));
+  let beforeAfterMonths = getBeforeAfterMonths(questionData[0].month)
   let selected = randomDataWithGaussian(questionData, monthItems);
+  let islands = selected.map((s) => s.island);
+
+  let intersection = data.filter((x) => !questionData.includes(x) && beforeAfterMonths.indexOf(x.month) > -1 && islands.indexOf(x.island) > -1);
   selected = selected.concat(randomDataWithGaussian(intersection, rest));
   return shuffle(selected);
 }

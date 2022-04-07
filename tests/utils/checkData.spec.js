@@ -1,4 +1,4 @@
-import { checkData, getEntry, checkAnswer } from '../../src/utils/data.js';
+import { checkData, getEntry, checkAnswer, getBeforeAfterMonths } from '../../src/utils/data.js';
 
 describe("#checkData" , () => {
   it("checks the question data by answer", () => {
@@ -70,5 +70,19 @@ describe('#checkAnswer', () => {
   ])('.checkAnswer(%s)', (answer, expected) => {
     let result = checkAnswer( data, question,answer);
     expect(result).toEqual(expected);
+  })
+})
+describe("#getBeforeAfterMonths" , () => {
+  test.each([
+    ['April', 'March', 'May'],
+    ['November', 'October', 'December'],
+    ['January', 'December', 'February'],
+    ['December', 'November', 'January'],
+  ])('.getBeforeAfterMonths(%s) returns %s %s', (month, before, after) => {
+    let [resultBefore, resultAfter] = getBeforeAfterMonths(month)
+
+    expect(resultBefore).toEqual(before)
+    expect(resultAfter).toEqual(after)
+
   })
 })

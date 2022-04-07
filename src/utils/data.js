@@ -31,6 +31,13 @@ export function checkAnswer(data, question, answer = "") {
   return regex.test(answer);
 }
 
+export function getBeforeAfterMonths(month) {
+  const indexMonth = monthNames.indexOf(month);
+  const before = indexMonth === 0 ? 11 : indexMonth-1
+  const after = indexMonth === 11 ? 0 : indexMonth+1
+  return [monthNames[before], monthNames[after]]
+}
+
 export const monthNames = [
   "January",
   "February",

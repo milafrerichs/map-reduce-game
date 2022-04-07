@@ -33,7 +33,7 @@ export const selectedData = derived(
 export const groupedData = derived(
   [data, questionData, selectedData],
   ([$data, $questionData, $selectedData]) =>
-    randomFromData($data, $questionData, $selectedData, 16)
+    randomFromData($data, $questionData, $selectedData, 6)
 );
 
 export const otherAnswers = derived(

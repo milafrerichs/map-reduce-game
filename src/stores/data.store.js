@@ -20,20 +20,41 @@ export const theme = readable({
   },
 });
 
+let dataCache = [];
+let questionCache = {};
+let questionDataCache = [];
+let selectedDataCache = [];
+let groupedDataCache = [];
+let otherAnswersCache = [];
 
-export const questionData = derived([data, question], ([$data, $question]) =>
-  $data.filter($question.filter)
-);
+export const questionData = derived([data, question], ([$data, $question], set) => {
+  if(dataCache !== $data || questionCache !== $question) {
+    dataCache = $data;
+    questionCache = $question;
+    set($data.filter($question.filter))
+  }
+});
 
 export const selectedData = derived(
   [data, questionData],
-  ([$data, $questionData]) => randomSelectedFromData($data, $questionData, 16)
+  ([$data, $questionData], set) => {
+    if(dataCache !== $data || questionDataCache !== $questionData) {
+      dataCache = $data;
+      questionDataCache = $questionData;
+      set(randomSelectedFromData($data, $questionData, 16));
+    }
+  }
 );
 
 export const groupedData = derived(
   [data, questionData, selectedData],
-  ([$data, $questionData, $selectedData]) =>
-    randomFromData($data, $questionData, $selectedData, 6)
+  ([$data, $questionData, $selectedData], set) => {
+    if(dataCache !== $data || questionDataCache !== $questionData || selectedDataCache !== $selectedData) {
+      selectedDataCache = $selectedData;
+      set(randomFromData($data, $questionData, $selectedData, 6));
+    }
+  }
+
 );
 
 export const otherAnswers = derived(

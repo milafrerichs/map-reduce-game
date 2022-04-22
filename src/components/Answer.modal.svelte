@@ -30,7 +30,7 @@
     aria-label="Question"
     role="dialog"
     aria-modal="true"
-    class="absolute left-0 top-0 flex h-screen w-screen items-center justify-center overflow-hidden"
+    class="z-30 absolute left-0 top-0 flex h-screen w-screen items-center justify-center overflow-hidden"
   >
     <!-- Dark Overlay -->
     <div
@@ -40,7 +40,7 @@
     />
 
     <div
-      class="relative flex w-full max-w-4xl flex-col rounded bg-white py-12 px-4 shadow"
+      class="z-30 relative flex w-full max-w-4xl flex-col rounded bg-white py-12 px-4 shadow"
       transition:fly={{ y: -20, duration: 300 }}
     >
       <!-- Close Button -->

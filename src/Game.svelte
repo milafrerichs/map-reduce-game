@@ -87,7 +87,8 @@
     <Answers />
     <Waves />
   {:else}
-    <Result />
+    <Answers showResult/>
+    <Waves />
   {/if}
 </main>
 

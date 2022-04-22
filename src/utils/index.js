@@ -1,4 +1,4 @@
-import { getBeforeAfterMonths } from './data.js';
+import { getBeforeAfterMonths, monthNames } from './data.js';
 
 export function randomGaussian(length, v = 4) {
   // https://riptutorial.com/javascript/example/8330/random--with-gaussian-distribution
@@ -141,6 +141,26 @@ export function chunkArray(inputArray, chunks = 2) {
     resultArray[chunkIndex].push(item);
     return resultArray;
   }, []);
+}
+
+export function sortByMonth(a,b) {
+  var aIndex = monthNames.indexOf(a.month)
+  var bIndex = monthNames.indexOf(b.month)
+  return aIndex - bIndex;
+}
+
+export function sortByKey(key) {
+  return function(a,b) {
+    var aValue = (a[key]).toUpperCase();
+    var bValue = b[key].toUpperCase();
+    if (aValue < bValue) {
+          return -1;
+    }
+    if (aValue > bValue) {
+          return 1;
+    }
+    return 0;
+  }
 }
 
 export function seasons(month) {

@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { sortByKey } from "./utils/index.js";
   import { checkAnswer, getEntry } from "./utils/data.js";
   import Table from "./TableV2.svelte";
   import { updateAnswer } from "./stores/game.store";
@@ -12,7 +13,7 @@
 
   const dispatch = createEventDispatcher();
 
-  $: data = $selectedData;
+  $: data = $selectedData.sort(sortByKey("island"));
 
   let showAnswerDialog = false;
 

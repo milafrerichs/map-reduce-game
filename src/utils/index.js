@@ -1,5 +1,7 @@
 import { getBeforeAfterMonths, monthNames } from './data.js';
 
+let islands = [ "Crete", "Euboea", "Lesbos", "Rhodes", "Chios", "Cephalonia", "Corfu", "Lemnos", "Samos", "Naxos", "Zakynthos", "Thasos", "Andros", "Lefkada", "Karpathos", "Kos", "Kythira", "Icaria", "Skyros", "Paros", "Tinos", "Samothraki", "Milos", "Kea", "Amorgos", "Kalymnos", "Ios", "Kythnos", "Astypalaia", "Ithaca", "Salamis"  ];
+
 export function randomGaussian(length, v = 4) {
   // https://riptutorial.com/javascript/example/8330/random--with-gaussian-distribution
   let r = 0;
@@ -42,14 +44,24 @@ function shuffle(array) {
   return array;
 }
 
+/*
+ * pick three islands
+ * get randomData for these three islands
+ * find out the max, filter out any that we only have one max
+ * get other data points for these islands for the previous and next month
+ */
 export function randomSelectedFromData(data, questionData, dataItems = 10) {
   let monthItems = Math.ceil(dataItems / 2);
-  let rest = dataItems - monthItems;
   let beforeAfterMonths = getBeforeAfterMonths(questionData[0].month)
-  let selected = randomDataWithGaussian(questionData, monthItems);
-  let islands = selected.map((s) => s.island);
+  let selectedIslands = randomDataWithGaussian(islands, 3)
+  let qData = questionData.filter((d) => selectedIslands.includes(d.island))
+  let selectedRaw = randomDataWithGaussian(qData, monthItems);
+  let max = maxWithKey(selectedRaw, "d")
+  let selected = selectedRaw.filter(function(d) { return d.d < max })
+  selected.push(selectedRaw.filter(function(d) { return d.d == max })[0])
 
-  let intersection = data.filter((x) => !questionData.includes(x) && beforeAfterMonths.indexOf(x.month) > -1 && islands.indexOf(x.island) > -1);
+  let rest = dataItems - selected.length;
+  let intersection = data.filter((x) => !questionData.includes(x) && beforeAfterMonths.indexOf(x.month) > -1 && selectedIslands.indexOf(x.island) > -1 && x.d < max);
   selected = selected.concat(randomDataWithGaussian(intersection, rest));
   return shuffle(selected);
 }
@@ -151,8 +163,14 @@ export function sortByMonth(a,b) {
 
 export function sortByKey(key) {
   return function(a,b) {
-    var aValue = (a[key]).toUpperCase();
-    var bValue = b[key].toUpperCase();
+    var aValue = (a[key]);
+    var bValue = b[key];
+    if(typeof aValue === "string"){
+      aValue = aValue.toUpperCase();
+    }
+    if(typeof bValue === "string"){
+      bValue = bValue.toUpperCase();
+    }
     if (aValue < bValue) {
           return -1;
     }
@@ -161,6 +179,12 @@ export function sortByKey(key) {
     }
     return 0;
   }
+}
+
+export function maxWithKey(arr, key) {
+  return arr.reduce(function(acc, b) {
+      return Math.max(acc, b[key]);
+  }, -Infinity);
 }
 
 export function seasons(month) {
@@ -185,3 +209,4 @@ export function seasons(month) {
       return "summer";
   }
 }
+

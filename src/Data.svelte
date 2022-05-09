@@ -45,7 +45,9 @@
       data: data,
       useGrid: true,
       component: Dot,
+      padding: 0,
       size: 20,
+      offset: 0,
       props: { radius: 5, highlightSelected: true, selectedColor: "red" },
     },
   ];

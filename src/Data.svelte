@@ -25,15 +25,19 @@
       data: islands,
       useGrid: true,
       component: Island,
-      size: 200,
-      props: { width: 200, height: 200, padding: 20 },
+      size: 340,
+      padding: 0,
+      offset: 0,
+      props: { width: 400, height: 200, padding: 40 },
     },
     {
       name: "allCircles",
       data: data,
       useGrid: true,
       component: Dot,
+      padding: 0,
       size: 20,
+      offset: 0,
       props: { radius: 5 },
     },
     {
@@ -66,20 +70,20 @@
     .domain(range(cols))
     .range([0, width])
     .round(true)
-    .padding(1);
+    .padding(currentStep.padding || 0);
 
   $: rowScale = scalePoint()
     .domain(range(rows))
     .range([0, height])
     .round(true)
-    .padding(1);
+    .padding(currentStep.padding || 0);
 
   function transform(d, i) {
     if (useGrid) {
       let row = Math.floor(i / cols);
       let col = cols == 1 ? 0 : i % cols;
 
-      return `translate(${colScale(col)}, ${rowScale(row) - size})`;
+      return `translate(${colScale(col)}, ${rowScale(row) - currentStep.offset})`;
     }
     return "translate(0,0)";
   }

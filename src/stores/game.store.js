@@ -61,7 +61,6 @@ export const currentStep = derived(
 );
 
 export const next = function () {
-  console.log("next");
   stepIndex.update((n) => n + 1);
 };
 export const prev = function () {

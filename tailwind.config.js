@@ -40,6 +40,9 @@ module.exports = {
         "gradient-morning":
           "linear-gradient(180deg, #BD8CD0 0%, #D9DDE4 0%, #F3C7B5 48.93%, #FBB593 100%);",
       },
+      screens: {
+        'tall': { 'raw': '(min-height: 800px)'  },
+      }
     },
   },
   plugins: [
